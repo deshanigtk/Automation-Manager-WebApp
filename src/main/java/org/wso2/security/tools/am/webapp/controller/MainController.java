@@ -16,11 +16,23 @@ package org.wso2.security.tools.am.webapp.controller;/*
 * under the License.
 */
 
+import org.json.JSONArray;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.wso2.security.tools.am.webapp.service.MainService;
 
 @Controller
 public class MainController {
+
+    private final MainService mainService;
+
+    @Autowired
+    public MainController(MainService mainService) {
+        this.mainService = mainService;
+    }
 
     @GetMapping(value = "/signin")
     public String signIn() {
@@ -34,6 +46,13 @@ public class MainController {
 
     @GetMapping(value = "/myScans")
     public String myScans() {
+        return "common/myScans";
+    }
+
+    @GetMapping(value = "getMyScans")
+    public String getMyScans(String userId, Model model) {
+        JSONArray array = mainService.getMyScanners(userId);
+        model.addAttribute("staticScanners", array);
         return "common/myScans";
     }
 

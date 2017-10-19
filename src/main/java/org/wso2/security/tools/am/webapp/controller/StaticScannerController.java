@@ -16,18 +16,15 @@ package org.wso2.security.tools.am.webapp.controller;/*
 * under the License.
 */
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.utils.URIBuilder;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.am.webapp.entity.StaticScanner;
-import org.wso2.security.tools.am.webapp.handlers.HttpRequestHandler;
-
-import java.net.URI;
-import java.net.URISyntaxException;
+import org.wso2.security.tools.am.webapp.service.StaticScannerService;
 
 @Controller
 @PropertySource("classpath:global.properties")
@@ -35,14 +32,14 @@ import java.net.URISyntaxException;
 @RequestMapping(value = "staticScanner")
 public class StaticScannerController {
 
-    @Value("${automation_manager_host}")
-    private String automationManagerHost;
+    private final StaticScannerService staticScannerService;
 
-    @Value("${automation_manager_port}")
-    private int automationManagerPort;
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-    private final String HTTP = "http";
-    private final String HTTPS = "https";
+    @Autowired
+    public StaticScannerController(StaticScannerService staticScannerService) {
+        this.staticScannerService = staticScannerService;
+    }
 
     @ModelAttribute("staticScanner")
     public StaticScanner getStaticScanner() {
@@ -51,13 +48,10 @@ public class StaticScannerController {
 
     @PostMapping(value = "scanners")
     public String scanners(@ModelAttribute("staticScanner") StaticScanner staticScanner,
-                           @RequestParam String userId, @RequestParam String name, @RequestParam String ipAddress, @RequestParam int containerPort,
-                           @RequestParam int hostPort) throws InterruptedException {
+                           @RequestParam String userId, @RequestParam String name, @RequestParam String ipAddress) throws InterruptedException {
         staticScanner.setUserId(userId);
         staticScanner.setName(name);
         staticScanner.setIpAddress(ipAddress);
-        staticScanner.setContainerPort(containerPort);
-        staticScanner.setHostPort(hostPort);
         return "staticScanner/scanners";
     }
 
@@ -70,8 +64,8 @@ public class StaticScannerController {
     public String productUploader(@ModelAttribute("staticScanner") StaticScanner staticScanner, @RequestParam boolean isFindSecBugs,
                                   @RequestParam boolean isDependencyCheck) {
 
-        staticScanner.setDoFindSecBugs(isFindSecBugs);
-        staticScanner.setDoDependencyCheck(isDependencyCheck);
+        staticScanner.setFindSecBugs(isFindSecBugs);
+        staticScanner.setDependencyCheck(isDependencyCheck);
         return "staticScanner/productUploader";
     }
 
@@ -81,38 +75,15 @@ public class StaticScannerController {
     }
 
     @PostMapping(value = "startScan")
-    public void startScan(@ModelAttribute("staticScanner") StaticScanner staticScanner,
-                          @RequestParam boolean isZipFileUpload,
-                          @RequestParam(required = false) MultipartFile zipFile,
-                          @RequestParam(required = false) String url,
-                          @RequestParam(required = false) String branch,
-                          @RequestParam(required = false) String tag) {
+    public String startScan(@ModelAttribute("staticScanner") StaticScanner staticScanner,
+                            @RequestParam boolean isFileUpload,
+                            @RequestParam(required = false) MultipartFile zipFile,
+                            @RequestParam(required = false) String url,
+                            @RequestParam(required = false) String branch,
+                            @RequestParam(required = false) String tag) {
 
-        try {
-            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme(HTTP).setPath("start")
-                    .addParameter("userId", staticScanner.getUserId())
-                    .addParameter("ipAddress", staticScanner.getIpAddress())
-                    .addParameter("hostPort", String.valueOf(staticScanner.getHostPort()))
-                    .addParameter("containerPort", String.valueOf(staticScanner.getContainerPort()))
-                    .build();
-
-            HttpResponse response = HttpRequestHandler.sendPostRequest(uri, null);
-
-            if (response != null) {
-                if (isZipFileUpload) {
-                    uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme(HTTP).setPath("upload")
-                            .addParameter("userId", staticScanner.getUserId())
-                            .addParameter("ipAddress", staticScanner.getIpAddress())
-                            .addParameter("hostPort", String.valueOf(staticScanner.getHostPort()))
-                            .addParameter("containerPort", String.valueOf(staticScanner.getContainerPort()))
-                            .build();
-
-                    response = HttpRequestHandler.sendPostRequest(uri, null);
-                }
-            }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
+        String response = staticScannerService.startScan(staticScanner, isFileUpload, zipFile, url, branch, tag);
+        LOGGER.info("Start static scanner response: " + response);
+        return "common/myScans";
     }
 }

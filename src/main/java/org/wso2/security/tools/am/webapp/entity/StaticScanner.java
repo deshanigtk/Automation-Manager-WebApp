@@ -18,26 +18,14 @@ package org.wso2.security.tools.am.webapp.entity;
 */
 
 public class StaticScanner {
+
     private String userId;
     private String name;
     private String ipAddress;
-    private int containerPort;
-    private int hostPort;
-    private boolean isProductAvailable;
-
-    private boolean doFindSecBugs;
-    private boolean doDependencyCheck;
+    private boolean isFindSecBugs;
+    private boolean isDependencyCheck;
 
     public StaticScanner() {
-    }
-
-    public StaticScanner(String userId, String ipAddress, int containerPort, int hostPort) {
-
-        this.userId = userId;
-//        this.name = name;
-        this.ipAddress = ipAddress;
-        this.containerPort = containerPort;
-        this.hostPort = hostPort;
     }
 
     public void setUserId(String userId) {
@@ -48,28 +36,16 @@ public class StaticScanner {
         this.ipAddress = ipAddress;
     }
 
-    public void setContainerPort(int containerPort) {
-        this.containerPort = containerPort;
-    }
-
-    public void setHostPort(int hostPort) {
-        this.hostPort = hostPort;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setProductAvailable(boolean productAvailable) {
-        this.isProductAvailable = productAvailable;
+    public void setFindSecBugs(boolean findSecBugs) {
+        this.isFindSecBugs = findSecBugs;
     }
 
-    public void setDoFindSecBugs(boolean doFindSecBugs) {
-        this.doFindSecBugs = doFindSecBugs;
-    }
-
-    public void setDoDependencyCheck(boolean doDependencyCheck) {
-        this.doDependencyCheck = doDependencyCheck;
+    public void setDependencyCheck(boolean dependencyCheck) {
+        this.isDependencyCheck = dependencyCheck;
     }
 
     public String getUserId() {
@@ -84,24 +60,12 @@ public class StaticScanner {
         return ipAddress;
     }
 
-    public int getContainerPort() {
-        return containerPort;
+    public boolean isFindSecBugs() {
+        return isFindSecBugs;
     }
 
-    public int getHostPort() {
-        return hostPort;
-    }
-
-    public boolean isProductAvailable() {
-        return isProductAvailable;
-    }
-
-    public boolean isDoFindSecBugs() {
-        return doFindSecBugs;
-    }
-
-    public boolean isDoDependencyCheck() {
-        return doDependencyCheck;
+    public boolean isDependencyCheck() {
+        return isDependencyCheck;
     }
 
 

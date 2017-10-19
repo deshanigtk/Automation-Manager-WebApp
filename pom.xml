@@ -56,6 +56,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20131018</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>automation-manager-webapp</finalName>
@@ -65,7 +70,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
-                    <mainClass>org.wso2.security.tools.automation.manager.webapp.Application</mainClass>
+                    <mainClass>org.wso2.security.tools.am.webapp.Application</mainClass>
                 </configuration>
                 <executions>
                     <execution>

@@ -6,12 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <%@ include file="../fragments/header.html" %>
-    <%@include file="../fragments/navBar.jsp" %>
 </head>
 <body>
+<%@include file="../fragments/navBar.jsp" %>
 <div class="container">
     <div class="row">
         <div class="page-header">
@@ -23,18 +24,35 @@
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Upload a zip file</h2>
                 <p>Upload a zip file of the product</p>
-                <form action="#" method="post"
+                <form action="/dynamicScanner/startScan" method="post"
                       enctype="multipart/form-data">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Zip File</span>
-                        <input type="file" name="zipFile" id="zipFile" class="form-control">
+                        <input type="file" name="zipFile" class="form-control" required>
                     </div>
                     <br>
                     <div class="input-group input-group-md">
-                        <span class="input-group-addon">Container ID</span>
-                        <input name="containerId" class="form-control">
+                        <span class="input-group-addon">URL List File</span>
+                        <input type="file" name="urlListFile" class="form-control" required>
                     </div>
                     <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon">
+                                <input type="checkbox" name="isAuthenticatedScan" checked>
+                            <input type="hidden" name="isAuthenticatedScan" value="1">
+                        </span>
+                        <label class="form-control">Authenticated Scan</label>
+                    </div>
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon">
+                            <input type="checkbox" name="isUnauthenticatedScan" checked>
+                            <input type="hidden" name="isUnauthenticatedScan" value="1">
+                        </span>
+                        <label class="form-control">Unauthenticated Scan</label>
+                    </div>
+                    <br>
+                    <input type="hidden" name="isFileUpload" value="true">
                     <button class="btn btn-primary btn-block">Submit and Start Scan</button>
                 </form>
             </div>
@@ -43,26 +61,54 @@
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Enter Details of Server</h2>
                 <p>Enter Details of up and running server</p>
-                <form action="#" method="post">
+                <form action="/dynamicScanner/startScan" method="post">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">IP Address</span>
-                        <input name="ipAddress" id="ipAddress" class="form-control">
+                        <input name="wso2ServerHost" class="form-control">
                     </div>
                     <br>
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Port</span>
-                        <input name="port" id="port" class="form-control">
+                        <input name="wso2ServerPort" class="form-control" type="number" required>
                     </div>
                     <br>
                     <div class="input-group input-group-md">
-                        <span class="input-group-addon">Container ID</span>
-                        <input name="containerId" class="form-control">
+                        <span class="input-group-addon">URL List File</span>
+                        <input type="file" name="urlListFile" class="form-control" required>
                     </div>
                     <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon">
+                                <input type="checkbox" name="isAuthenticatedScan">
+                            <input type="hidden" name="isAuthenticatedScan" value="0">
+                        </span>
+                        <label class="form-control">Authenticated Scan</label>
+                    </div>
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon">
+                            <input type="checkbox" name="isUnauthenticatedScan">
+                            <input type="hidden" name="isUnauthenticatedScan" value="0">
+                        </span>
+                        <label class="form-control">Unauthenticated Scan</label>
+                    </div>
+                    <br>
+                    <input type="hidden" name="isFileUpload" value="false">
+
                     <button class="btn btn-primary btn-block">Submit and Start Scan</button>
                 </form>
             </div>
         </div>
+
+        <c:if test="${message != ''}">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Message</strong> ${message}
+                </div>
+            </div>
+
+        </c:if>
     </div>
 </div>
 <%@include file="../fragments/footer.jsp" %>

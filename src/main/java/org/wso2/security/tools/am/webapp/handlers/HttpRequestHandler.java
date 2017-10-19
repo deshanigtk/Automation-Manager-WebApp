@@ -21,7 +21,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -58,10 +57,12 @@ public class HttpRequestHandler {
         try {
             HttpPost httpPostRequest = new HttpPost(request);
 
-            for (NameValuePair parameter : parameters) {
-                urlParameters.add(new BasicNameValuePair(parameter.getName(), parameter.getValue()));
+            if (parameters != null) {
+                for (NameValuePair parameter : parameters) {
+                    urlParameters.add(new BasicNameValuePair(parameter.getName(), parameter.getValue()));
+                }
+                httpPostRequest.setEntity(new UrlEncodedFormEntity(urlParameters));
             }
-            httpPostRequest.setEntity(new UrlEncodedFormEntity(urlParameters));
             return httpClient.execute(httpPostRequest);
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,8 +70,8 @@ public class HttpRequestHandler {
         return null;
     }
 
-    public static HttpResponse sendMultipartRequest(URI uri, MultipartFile file, Map<String, String> textBody) {
-        CloseableHttpResponse response = null;
+    public static HttpResponse sendMultipartRequest(URI uri, Map<String, MultipartFile> files, Map<String, String> textBody) {
+        HttpResponse response = null;
         try {
             HttpPost uploadFile = new HttpPost(uri);
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
@@ -80,15 +81,19 @@ public class HttpRequestHandler {
                 }
             }
             // This attaches the file to the POST:
-            InputStream inputStream = file.getInputStream();
+            if(files!=null) {
+                for (Map.Entry<String, MultipartFile> entry : files.entrySet()) {
+                    InputStream inputStream = entry.getValue().getInputStream();
 
-            builder.addBinaryBody(
-                    "file",
-                    inputStream,
-                    ContentType.APPLICATION_OCTET_STREAM,
-                    file.getOriginalFilename()
-            );
+                    builder.addBinaryBody(
+                            entry.getKey(),
+                            inputStream,
+                            ContentType.APPLICATION_OCTET_STREAM,
+                            entry.getValue().getOriginalFilename()
+                    );
 
+                }
+            }
             HttpEntity multipart = builder.build();
             uploadFile.setEntity(multipart);
             response = httpClient.execute(uploadFile);
