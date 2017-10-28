@@ -3,8 +3,10 @@
 /home/deshani/Documents/1.Project/AutomationManagerWebapp/src/main/java/org/wso2/security/tools/am/webapp/ServletInitializer.java
 /home/deshani/Documents/1.Project/AutomationManagerWebapp/src/main/java/org/wso2/security/tools/am/webapp/controller/DynamicScannerController.java
 /home/deshani/Documents/1.Project/AutomationManagerWebapp/src/main/java/org/wso2/security/tools/am/webapp/entity/Zap.java
+/home/deshani/Documents/1.Project/AutomationManagerWebapp/src/main/java/org/wso2/security/tools/am/webapp/handlers/MultipartUtility.java
 /home/deshani/Documents/1.Project/AutomationManagerWebapp/src/main/java/org/wso2/security/tools/am/webapp/entity/DynamicScanner.java
 /home/deshani/Documents/1.Project/AutomationManagerWebapp/src/main/java/org/wso2/security/tools/am/webapp/controller/StaticScannerController.java
+/home/deshani/Documents/1.Project/AutomationManagerWebapp/src/main/java/org/wso2/security/tools/am/webapp/handlers/HttpsRequestHandler.java
 /home/deshani/Documents/1.Project/AutomationManagerWebapp/src/main/java/org/wso2/security/tools/am/webapp/service/StaticScannerService.java
 /home/deshani/Documents/1.Project/AutomationManagerWebapp/src/main/java/org/wso2/security/tools/am/webapp/service/MainService.java
 /home/deshani/Documents/1.Project/AutomationManagerWebapp/src/main/java/org/wso2/security/tools/am/webapp/entity/User.java

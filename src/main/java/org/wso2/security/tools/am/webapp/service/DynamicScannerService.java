@@ -37,66 +37,41 @@ public class DynamicScannerService {
     @Value("${AUTOMATION_MANAGER_HOST}")
     private String automationManagerHost;
 
-    @Value("${AUTOMATION_MANGER_PORT}")
+    @Value("${AUTOMATION_MANAGER_PORT}")
     private int automationManagerPort;
 
     @Value("${START_DYNAMIC_SCAN}")
     private String startScan;
 
-    @Value("${START_ZAP}")
-    private String startZap;
-
     private final String HTTP = "http";
     private final String HTTPS = "https";
 
     public String startScan(DynamicScanner dynamicScanner, MultipartFile urlListFile, boolean isFileUpload, MultipartFile zipFile,
-                            String wso2ServerHost, int wso2ServerPort, boolean isAuthenticatedScan, boolean isUnauthenticatedScan) {
+                            String wso2ServerHost, int wso2ServerPort, boolean isAuthenticatedScan) {
         try {
-
-            URI uriToStartZap = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme(HTTP).setPath(startZap)
+            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme(HTTP).setPath(startScan)
                     .addParameter("userId", dynamicScanner.getUserId())
                     .addParameter("name", dynamicScanner.getName())
                     .addParameter("ipAddress", dynamicScanner.getIpAddress())
+                    .addParameter("isFileUpload", String.valueOf(isFileUpload))
+                    .addParameter("wso2ServerHost", wso2ServerHost)
+                    .addParameter("wso2ServerPort", String.valueOf(wso2ServerPort))
+                    .addParameter("isAuthenticatedScan", String.valueOf(isAuthenticatedScan))
                     .build();
 
-            System.out.println(uriToStartZap);
-
-            HttpResponse response = HttpRequestHandler.sendPostRequest(uriToStartZap, null);
-            if (response != null) {
-                String zapContainerId = HttpRequestHandler.printResponse(response);
-                if (zapContainerId != null) {
-
-                    URI uriToStartScan = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme(HTTP).setPath(startScan)
-                            .addParameter("userId", dynamicScanner.getUserId())
-                            .addParameter("name", dynamicScanner.getName())
-                            .addParameter("ipAddress", dynamicScanner.getIpAddress())
-                            .addParameter("isFileUpload", String.valueOf(isFileUpload))
-                            .addParameter("relatedZapContainerId", zapContainerId)
-                            .addParameter("wso2ServerHost", wso2ServerHost)
-                            .addParameter("wso2ServerPort", String.valueOf(wso2ServerPort))
-                            .addParameter("isAuthenticatedScan", String.valueOf(isAuthenticatedScan))
-                            .addParameter("isUnauthenticatedScan", String.valueOf(isUnauthenticatedScan))
-                            .build();
-                    System.out.println(uriToStartScan);
-
-                    Map<String, MultipartFile> files = new HashMap<>();
-                    if (zipFile != null) {
-                        files.put("zipFile", zipFile);
-                    }
-                    files.put("urlListFile", urlListFile);
-
-                    HttpResponse response2 = HttpRequestHandler.sendMultipartRequest(uriToStartScan, files, null);
-                    if (response2 != null) {
-                        return HttpRequestHandler.printResponse(response2);
-                    } else {
-                        return "Cannot execute ZAP scan";
-                    }
-                } else {
-                    return "ZAP container is not started";
-                }
-            } else {
-                return "Zap container cannot start";
+            Map<String, MultipartFile> files = new HashMap<>();
+            if (zipFile != null) {
+                files.put("zipFile", zipFile);
             }
+            files.put("urlListFile", urlListFile);
+
+            HttpResponse response = HttpRequestHandler.sendMultipartRequest(uri, files, null);
+            if (response != null) {
+                return HttpRequestHandler.printResponse(response);
+            } else {
+                return "Cannot execute ZAP scan";
+            }
+
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return e.getMessage();

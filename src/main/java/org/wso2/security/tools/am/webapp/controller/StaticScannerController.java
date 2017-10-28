@@ -26,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.am.webapp.entity.StaticScanner;
 import org.wso2.security.tools.am.webapp.service.StaticScannerService;
 
+import java.io.File;
+
 @Controller
 @PropertySource("classpath:global.properties")
 @SessionAttributes("staticScanner")

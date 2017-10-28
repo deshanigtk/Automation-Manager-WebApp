@@ -26,7 +26,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.wso2.security.tools.am.webapp.entity.StaticScanner;
 import org.wso2.security.tools.am.webapp.handlers.HttpRequestHandler;
+import org.wso2.security.tools.am.webapp.handlers.HttpsRequestHandler;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -39,8 +41,11 @@ public class MainService {
     @Value("${AUTOMATION_MANAGER_HOST}")
     private String automationManagerHost;
 
-    @Value("${AUTOMATION_MANGER_PORT}")
+    @Value("${AUTOMATION_MANAGER_PORT}")
     private int automationManagerPort;
+
+    @Value("${AUTOMATION_MANAGER_HTTPS_PORT}")
+    private int automationManagerHttpsPort;
 
     @Value("${GET_STATIC_SCANNERS}")
     private String getStaticScanners;
@@ -51,18 +56,26 @@ public class MainService {
 
     public JSONArray getMyScanners(String userId) {
         try {
-            URI uriToGetStaticScanners = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("http").setPath(getStaticScanners)
+            URI uriToGetStaticScanners = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerHttpsPort)
+                    .setScheme("https").setPath(getStaticScanners)
                     .addParameter("userId", userId)
                     .build();
 
-            HttpResponse response = HttpRequestHandler.sendGetRequest(uriToGetStaticScanners);
+//            HttpResponse response = HttpRequestHandler.sendGetRequest(uriToGetStaticScanners);
+//
+//            if (response != null) {
+//                String json_string = EntityUtils.toString(response.getEntity());
+//                JSONArray temp1 = new JSONArray(json_string);
+//                return temp1;
+//            }
 
-            if (response != null) {
-                String json_string = EntityUtils.toString(response.getEntity());
-                JSONArray temp1 = new JSONArray(json_string);
-                return temp1;
+            HttpsURLConnection httpsURLConnection = HttpsRequestHandler.sendRequest(uriToGetStaticScanners.toString(), null, null, "GET");
+
+            String json_string = HttpsRequestHandler.getResponseAsString(httpsURLConnection);
+
+            if (json_string != null) {
+                return new JSONArray(json_string);
             }
-
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
         }

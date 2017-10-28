@@ -31,7 +31,7 @@
                         </tr>
                             <%--<tr>--%>
                             <%--<th>Product Extracted Status</th>--%>
-                            <%--<td>${dynamicScanner.isDoFindSecBugs()}</td>--%>
+                            <%--<td>${dynamicScanner.isFindSecBugs()}</td>--%>
                             <%--</tr>--%>
                             <%--<tr>--%>
                             <%--<th>Product Extracted Time</th>--%>
@@ -56,37 +56,67 @@
             </div>
         </c:forEach>
         <h3>Static Scanners</h3>
-        <c:forEach items="${staticScanners}" var="staticScanner">
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="thumbnail">
-                    <table class="table table-bordered table-striped table-hover">
-                        <tbody>
-                        <tr>
-                            <th>Created Time</th>
-                            <td>${staticScanner.getCreatedTime()}</td>
-                        </tr>
-                        <tr>
-                            <th>Product Extracted Status</th>
-                            <td>${staticScanner.isFileExtracted()}</td>
-                        </tr>
-                        <tr>
-                            <th>Product Extracted Time</th>
-                            <td>${staticScanner.getFileExtractedTime()}</td>
-                        </tr>
-                        <tr>
-                            <th>Product Cloned Status</th>
-                            <td>${staticScanner.isProductCloned()}</td>
-                        </tr>
-                        <tr>
-                            <th>Product Cloned Time</th>
-                            <td>${staticScanner.getProductClonedTime()}</td>
-                        </tr>
+        <c:choose>
+            <c:when test="${staticScanners!=null}">
+                <c:forEach begin="0" end="${staticScanners.length()-1}" var="index">
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="thumbnail">
+                            <table class="table table-bordered table-striped table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>${staticScanners.getJSONObject(index).getString("name")}</td>
+                                </tr>
+                                <tr>
+                                    <th>Created Time</th>
+                                    <td>${staticScanners.getJSONObject(index).getString("createdTime")}</td>
+                                </tr>
+                                <tr>
+                                    <th>Product Extracted Status</th>
+                                    <td>${staticScanners.getJSONObject(index).getBoolean("fileExtracted")}</td>
+                                </tr>
+                                <tr>
+                                    <th>Product Extracted Time</th>
+                                    <td>${staticScanners.getJSONObject(index).getString("fileExtractedTime")}</td>
+                                </tr>
+                                <tr>
+                                    <th>Product Cloned Status</th>
+                                    <td>${staticScanners.getJSONObject(index).getBoolean("productCloned")}</td>
+                                </tr>
+                                    <%--<tr>--%>
+                                    <%--<th>Product Cloned Time</th>--%>
+                                    <%--<td>${staticScanners.getJSONObject(index).getString("productClonedTime")}</td>--%>
+                                    <%--</tr>--%>
+                                <tr>
+                                    <th>FindSecBugs Status</th>
+                                    <td>${staticScanners.getJSONObject(index).getString("findSecBugsStatus")}</td>
+                                </tr>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </c:forEach>
+                                <tr>
+                                    <th>Dependency Check Status</th>
+                                    <td>${staticScanners.getJSONObject(index).getString("dependencyCheckStatus")}</td>
+                                </tr>
+                                <tr>
+                                    <th>Report Sent Status</th>
+                                    <td>${staticScanners.getJSONObject(index).getBoolean("reportSent")}</td>
+                                </tr>
+
+                                <c:if test="${!staticScanners.getJSONObject(index).isNull('reportSentTime')}">
+                                    <tr>
+                                        <th>Report Sent Time</th>
+                                        <td>${staticScanners.getJSONObject(index).getString("reportSentTime")}</td>
+                                    </tr>
+                                </c:if>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <p>No static scans are found</p>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 

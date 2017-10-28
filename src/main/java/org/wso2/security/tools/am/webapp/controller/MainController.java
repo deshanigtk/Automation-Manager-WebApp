@@ -52,8 +52,11 @@ public class MainController {
     @GetMapping(value = "getMyScans")
     public String getMyScans(String userId, Model model) {
         JSONArray array = mainService.getMyScanners(userId);
+        System.out.println("array length");
+        System.out.println(array.length());
         model.addAttribute("staticScanners", array);
         return "common/myScans";
+
     }
 
 }

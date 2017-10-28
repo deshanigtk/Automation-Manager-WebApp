@@ -22,13 +22,14 @@
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Upload a zip file</h2>
                 <p>Upload a zip file of the product source code</p>
-                <form action="staticScanner/productUploaded" method="post"
+                <form action="/staticScanner/startScan" method="post"
                       enctype="multipart/form-data">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Zip File</span>
                         <input type="file" name="zipFile" id="zipFile" class="form-control">
                     </div>
                     <br>
+                    <input type="hidden" name="isFileUpload" value="true">
                     <button class="btn btn-primary btn-block">Submit & Start Scan</button>
                 </form>
             </div>
@@ -37,7 +38,7 @@
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Clone from GitHub</h2>
                 <p>Clone a product source code from GitHub repository</p>
-                <form action="/staticScanner/ProductCloned" method="post" enctype="multipart/form-data">
+                <form action="/staticScanner/startScan" method="post" enctype="multipart/form-data">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">GitHub URL</span>
                         <input name="url" id="url" class="form-control">
@@ -53,6 +54,7 @@
                         <input name="tag" id="tag" class="form-control">
                     </div>
                     <br>
+                    <input type="hidden" name="isFileUpload" value="false">
                     <button class="btn btn-primary btn-block">Submit & Start Scan</button>
                 </form>
             </div>

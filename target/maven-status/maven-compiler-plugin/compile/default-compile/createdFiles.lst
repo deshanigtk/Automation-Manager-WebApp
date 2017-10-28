@@ -1,8 +1,11 @@
 org/wso2/security/tools/am/webapp/controller/UserController.class
 org/wso2/security/tools/am/webapp/config/AppConfiguration.class
 org/wso2/security/tools/am/webapp/Application.class
+org/wso2/security/tools/am/webapp/handlers/HttpsRequestHandler.class
+org/wso2/security/tools/am/webapp/handlers/MultipartUtility.class
 org/wso2/security/tools/am/webapp/entity/DynamicScanner.class
 org/wso2/security/tools/am/webapp/controller/MainController.class
+org/wso2/security/tools/am/webapp/service/DynamicScannerService.class
 org/wso2/security/tools/am/webapp/service/StaticScannerService.class
 org/wso2/security/tools/am/webapp/controller/StaticScannerController.class
 org/wso2/security/tools/am/webapp/entity/StaticScanner.class

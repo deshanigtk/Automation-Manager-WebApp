@@ -77,11 +77,10 @@ public class DynamicScannerController {
                             @RequestParam(required = false) MultipartFile zipFile,
                             @RequestParam(required = false) String wso2ServerHost,
                             @RequestParam(required = false, defaultValue = "-1") int wso2ServerPort,
-                            @RequestParam boolean isAuthenticatedScan,
-                            @RequestParam boolean isUnauthenticatedScan) {
+                            @RequestParam boolean isAuthenticatedScan) {
 
         String response = dynamicScannerService.startScan(dynamicScanner, urlListFile, isFileUpload, zipFile, wso2ServerHost, wso2ServerPort,
-                isAuthenticatedScan, isUnauthenticatedScan);
+                isAuthenticatedScan);
         LOGGER.info("Response from start scan: " + response);
         setMessage(response);
 

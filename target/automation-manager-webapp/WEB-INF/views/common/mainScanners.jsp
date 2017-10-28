@@ -30,17 +30,6 @@
                     </div>
                     <br>
                     <div class="input-group input-group-md">
-                        <span class="input-group-addon">Host Port</span>
-                        <input name="hostPort" class="form-control" placeholder="Please enter host port" required>
-                    </div>
-                    <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">Container Port</span>
-                        <input name="containerPort" class="form-control" placeholder="Please enter container port"
-                               required>
-                    </div>
-                    <br>
-                    <div class="input-group input-group-md">
                         <span class="input-group-addon">Test Name</span>
                         <input name="name" class="form-control" placeholder="Please enter a name to test" required>
                     </div>
@@ -57,7 +46,7 @@
                 <p>This scanner will accept a zip file of the product, or else a url of already running server. Then
                     Dynamic Scanner can start scanning your up and running product using OWASP Zed Attack
                     proxy(ZAP).</p>
-                <form action="dynamicScanner/scanner" method="post">
+                <form action="/dynamicScanner/scanner" method="post">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">User ID</span>
                         <input name="userId" class="form-control" placeholder="Enter user ID" required>
@@ -67,17 +56,6 @@
                         <span class="input-group-addon">IP Address</span>
                         <input name="ipAddress" class="form-control"
                                placeholder="Please enter IP Address to host container" required>
-                    </div>
-                    <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">Host Port</span>
-                        <input name="hostPort" class="form-control" placeholder="Please enter host port" required>
-                    </div>
-                    <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">Container Port</span>
-                        <input name="containerPort" class="form-control" placeholder="Please enter container port"
-                               required>
                     </div>
                     <br>
                     <div class="input-group input-group-md">
