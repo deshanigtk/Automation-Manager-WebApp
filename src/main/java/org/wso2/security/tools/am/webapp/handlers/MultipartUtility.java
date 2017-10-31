@@ -29,7 +29,7 @@ import java.util.List;
 
 
 public class MultipartUtility {
-    private final String boundary;
+    private String boundary;
     private static final String LINE_FEED = "\r\n";
     private HttpsURLConnection httpsURLConnection;
     private String charset;
@@ -79,27 +79,25 @@ public class MultipartUtility {
      * @throws IOException
      */
 
-    public MultipartUtility(String requestURL, String charset)
-            throws IOException {
+    public MultipartUtility(String requestURL, String charset) throws IOException {
         init();
-        this.charset = charset;
+        if (isInitialized) {
+            this.charset = charset;
 
-        // creates a unique boundary based on time stamp
-        boundary = "===" + System.currentTimeMillis() + "===";
+            // creates a unique boundary based on time stamp
+            boundary = "===" + System.currentTimeMillis() + "===";
 
-        URL url = new URL(requestURL);
-        httpsURLConnection = (HttpsURLConnection) url.openConnection();
-        httpsURLConnection.setSSLSocketFactory(sslSocketFactory);
-        httpsURLConnection.setUseCaches(false);
-        httpsURLConnection.setDoOutput(true); // indicates POST method
-        httpsURLConnection.setDoInput(true);
-        httpsURLConnection.setRequestProperty("Content-Type",
-                "multipart/form-data; boundary=" + boundary);
-        httpsURLConnection.setRequestProperty("User-Agent", "CodeJava Agent");
-        httpsURLConnection.setRequestProperty("Test", "Bonjour");
-        outputStream = httpsURLConnection.getOutputStream();
-        writer = new PrintWriter(new OutputStreamWriter(outputStream, charset),
-                true);
+            URL url = new URL(requestURL);
+            httpsURLConnection = (HttpsURLConnection) url.openConnection();
+            httpsURLConnection.setSSLSocketFactory(sslSocketFactory);
+            httpsURLConnection.setUseCaches(false);
+            httpsURLConnection.setDoOutput(true); // indicates POST method
+            httpsURLConnection.setDoInput(true);
+            httpsURLConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+            httpsURLConnection.setRequestProperty("Authorization", "Bearer 50e156bc-a28e-34b7-9921-f5eaa944920d");
+            outputStream = httpsURLConnection.getOutputStream();
+            writer = new PrintWriter(new OutputStreamWriter(outputStream, charset), true);
+        }
     }
 
     /**

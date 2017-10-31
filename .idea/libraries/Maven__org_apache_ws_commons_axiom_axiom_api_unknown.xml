@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.ws.commons.axiom:axiom-api:unknown">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/ws/commons/axiom/axiom-api/unknown/axiom-api-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/ws/commons/axiom/axiom-api/unknown/axiom-api-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/ws/commons/axiom/axiom-api/unknown/axiom-api-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

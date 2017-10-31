@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.opensaml:opensaml:unknown">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/opensaml/opensaml/unknown/opensaml-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/opensaml/opensaml/unknown/opensaml-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/opensaml/opensaml/unknown/opensaml-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

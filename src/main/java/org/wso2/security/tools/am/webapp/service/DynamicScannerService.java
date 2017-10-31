@@ -16,19 +16,20 @@ package org.wso2.security.tools.am.webapp.service;/*
 * under the License.
 */
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.utils.URIBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.am.webapp.entity.DynamicScanner;
-import org.wso2.security.tools.am.webapp.handlers.HttpRequestHandler;
+import org.wso2.security.tools.am.webapp.handlers.MultipartUtility;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Service
 @PropertySource("classpath:global.properties")
@@ -37,42 +38,57 @@ public class DynamicScannerService {
     @Value("${AUTOMATION_MANAGER_HOST}")
     private String automationManagerHost;
 
-    @Value("${AUTOMATION_MANAGER_PORT}")
+    @Value("${AUTOMATION_MANAGER_HTTPS_PORT}")
     private int automationManagerPort;
 
     @Value("${START_DYNAMIC_SCAN}")
     private String startScan;
 
-    private final String HTTP = "http";
-    private final String HTTPS = "https";
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     public String startScan(DynamicScanner dynamicScanner, MultipartFile urlListFile, boolean isFileUpload, MultipartFile zipFile,
                             String wso2ServerHost, int wso2ServerPort, boolean isAuthenticatedScan) {
         try {
-            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme(HTTP).setPath(startScan)
-                    .addParameter("userId", dynamicScanner.getUserId())
-                    .addParameter("name", dynamicScanner.getName())
-                    .addParameter("ipAddress", dynamicScanner.getIpAddress())
-                    .addParameter("isFileUpload", String.valueOf(isFileUpload))
-                    .addParameter("wso2ServerHost", wso2ServerHost)
-                    .addParameter("wso2ServerPort", String.valueOf(wso2ServerPort))
-                    .addParameter("isAuthenticatedScan", String.valueOf(isAuthenticatedScan))
+            if (isFileUpload) {
+                if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
+                    return "Please upload a zip file";
+                }
+            } else {
+                if (wso2ServerHost == null || wso2ServerPort == -1) {
+                    return "Please enter wso2 server host and port";
+                }
+            }
+
+            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("https").setPath(startScan)
                     .build();
 
-            Map<String, MultipartFile> files = new HashMap<>();
-            if (zipFile != null) {
-                files.put("zipFile", zipFile);
-            }
-            files.put("urlListFile", urlListFile);
+            String charset = "UTF-8";
 
-            HttpResponse response = HttpRequestHandler.sendMultipartRequest(uri, files, null);
-            if (response != null) {
-                return HttpRequestHandler.printResponse(response);
+            MultipartUtility multipartRequest = new MultipartUtility(uri.toString(), charset);
+
+            multipartRequest.addFormField("userId", dynamicScanner.getUserId());
+            multipartRequest.addFormField("name", dynamicScanner.getName());
+            multipartRequest.addFormField("ipAddress", dynamicScanner.getIpAddress());
+            multipartRequest.addFormField("isFileUpload", String.valueOf(isFileUpload));
+            multipartRequest.addFormField("isAuthenticatedScan", String.valueOf(isAuthenticatedScan));
+            multipartRequest.addFilePart("urlListFile", urlListFile.getInputStream(), urlListFile.getOriginalFilename());
+
+            if (isFileUpload) {
+                multipartRequest.addFilePart("zipFile", zipFile.getInputStream(), zipFile.getOriginalFilename());
+
             } else {
-                return "Cannot execute ZAP scan";
+                multipartRequest.addFormField("wso2ServerHost", wso2ServerHost);
+                multipartRequest.addFormField("wso2ServerPort", String.valueOf(wso2ServerPort));
             }
 
-        } catch (URISyntaxException e) {
+            List<String> response = multipartRequest.finish();
+            LOGGER.info("SERVER REPLIED:");
+
+            for (String line : response) {
+                LOGGER.info(line);
+            }
+            return "Ok";
+        } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
             return e.getMessage();
         }

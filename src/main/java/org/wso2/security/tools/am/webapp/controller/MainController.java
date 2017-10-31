@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.wso2.security.tools.am.webapp.service.MainService;
 
 @Controller
@@ -34,29 +33,22 @@ public class MainController {
         this.mainService = mainService;
     }
 
-    @GetMapping(value = "/signin")
+    @GetMapping(value = "signin")
     public String signIn() {
         return "common/signin";
     }
 
-    @GetMapping(value = "/mainScanners")
+    @GetMapping(value = "mainScanners")
     public String mainScanners() {
         return "common/mainScanners";
     }
 
-    @GetMapping(value = "/myScans")
-    public String myScans() {
-        return "common/myScans";
-    }
-
-    @GetMapping(value = "getMyScans")
+    @GetMapping(value = "myScanners")
     public String getMyScans(String userId, Model model) {
-        JSONArray array = mainService.getMyScanners(userId);
-        System.out.println("array length");
-        System.out.println(array.length());
-        model.addAttribute("staticScanners", array);
+        JSONArray[] scanners = mainService.getMyScanners(userId);
+        model.addAttribute("staticScanners", scanners[0]);
+        model.addAttribute("dynamicScanners", scanners[1]);
         return "common/myScans";
-
     }
 
 }

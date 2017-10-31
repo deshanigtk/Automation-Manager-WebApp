@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.santuario:xmlsec:unknown">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/santuario/xmlsec/unknown/xmlsec-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/santuario/xmlsec/unknown/xmlsec-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/santuario/xmlsec/unknown/xmlsec-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
