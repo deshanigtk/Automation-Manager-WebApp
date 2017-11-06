@@ -53,6 +53,7 @@
                     </div>
                     <br>
                     <input type="hidden" name="isFileUpload" value="true">
+                    <%=session.getAttribute("dynamicScanner.getName()")%>
                     <button class="btn btn-primary btn-block">Submit and Start Scan</button>
                 </form>
             </div>
