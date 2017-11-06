@@ -61,17 +61,24 @@ public class DynamicScannerController {
         dynamicScanner.setUserId(userId);
         dynamicScanner.setName(name);
         dynamicScanner.setIpAddress(ipAddress);
+        System.out.println(dynamicScanner.getUserId());
+        System.out.println(dynamicScanner.getIpAddress());
+        System.out.println(dynamicScanner.getName());
         return "dynamicScanner/scanner";
     }
 
     @GetMapping(value = "scanner")
     public String scanner(@ModelAttribute("dynamicScanner") DynamicScanner dynamicScanner, @ModelAttribute("message") String message) throws InterruptedException {
+        System.out.println(dynamicScanner.getName());
+        System.out.println(dynamicScanner.getUserId());
+        System.out.println(dynamicScanner.getIpAddress());
+
         return "dynamicScanner/scanner";
     }
     
     @PostMapping(value = "startScan")
     public String startScan(@ModelAttribute("dynamicScanner") DynamicScanner dynamicScanner,
-                            @ModelAttribute("message") String message,
+//                            @ModelAttribute("message") String message,
                             @RequestParam MultipartFile urlListFile,
                             @RequestParam boolean isFileUpload,
                             @RequestParam(required = false) MultipartFile zipFile,
@@ -79,10 +86,13 @@ public class DynamicScannerController {
                             @RequestParam(required = false, defaultValue = "-1") int wso2ServerPort,
                             @RequestParam boolean isAuthenticatedScan) {
 
-        String response = dynamicScannerService.startScan(dynamicScanner, urlListFile, isFileUpload, zipFile, wso2ServerHost, wso2ServerPort,
-                isAuthenticatedScan);
-        LOGGER.info("Response from start scan: " + response);
-        setMessage(response);
+        System.out.println(dynamicScanner.getName());
+        System.out.println(dynamicScanner.getUserId());
+        System.out.println(dynamicScanner.getIpAddress());
+//        String response = dynamicScannerService.startScan(dynamicScanner, urlListFile, isFileUpload, zipFile, wso2ServerHost, wso2ServerPort,
+//                isAuthenticatedScan);
+//        LOGGER.info("Response from start scan: " + response);
+//        setMessage(response);
 
         return "dynamicScanner/scanner";
 

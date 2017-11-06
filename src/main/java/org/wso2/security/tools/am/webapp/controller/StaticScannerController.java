@@ -54,6 +54,9 @@ public class StaticScannerController {
         staticScanner.setUserId(userId);
         staticScanner.setName(name);
         staticScanner.setIpAddress(ipAddress);
+        LOGGER.info(userId);
+        LOGGER.info(name);
+        LOGGER.info(ipAddress);
         return "staticScanner/scanners";
     }
 
@@ -84,6 +87,9 @@ public class StaticScannerController {
                             @RequestParam(required = false) String branch,
                             @RequestParam(required = false) String tag) {
 
+        LOGGER.info(staticScanner.getUserId());
+        LOGGER.info(staticScanner.getName());
+        LOGGER.info(staticScanner.getIpAddress());
         String response = staticScannerService.startScan(staticScanner, isFileUpload, zipFile, url, branch, tag);
         LOGGER.info("Start static scanner response: " + response);
         return "common/myScans";

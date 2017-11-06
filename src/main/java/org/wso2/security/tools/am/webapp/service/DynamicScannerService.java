@@ -49,6 +49,8 @@ public class DynamicScannerService {
     public String startScan(DynamicScanner dynamicScanner, MultipartFile urlListFile, boolean isFileUpload, MultipartFile zipFile,
                             String wso2ServerHost, int wso2ServerPort, boolean isAuthenticatedScan) {
         try {
+            System.out.println(dynamicScanner.getIpAddress());
+            System.out.println(dynamicScanner.getUserId());
             if (isFileUpload) {
                 if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
                     return "Please upload a zip file";

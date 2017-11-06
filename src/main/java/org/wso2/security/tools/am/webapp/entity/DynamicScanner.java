@@ -23,7 +23,14 @@ public class DynamicScanner {
     private String name;
     private String ipAddress;
 
-    public DynamicScanner() {
+
+    public DynamicScanner(String userId, String name, String ipAddress) {
+        this.userId = userId;
+        this.name = name;
+        this.ipAddress = ipAddress;
+    }
+    public DynamicScanner(){
+
     }
 
     public void setUserId(String userId) {

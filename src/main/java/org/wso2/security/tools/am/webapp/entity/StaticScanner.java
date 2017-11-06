@@ -25,8 +25,8 @@ public class StaticScanner {
     private boolean isFindSecBugs;
     private boolean isDependencyCheck;
 
-    public StaticScanner() {
-    }
+//    public StaticScanner() {
+//    }
 
     public void setUserId(String userId) {
         this.userId = userId;
