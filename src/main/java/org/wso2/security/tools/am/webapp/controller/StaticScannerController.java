@@ -19,17 +19,13 @@ package org.wso2.security.tools.am.webapp.controller;/*
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.am.webapp.entity.StaticScanner;
 import org.wso2.security.tools.am.webapp.service.StaticScannerService;
 
-import java.io.File;
-
 @Controller
-@PropertySource("classpath:global.properties")
 @SessionAttributes("staticScanner")
 @RequestMapping(value = "staticScanner")
 public class StaticScannerController {
@@ -50,13 +46,13 @@ public class StaticScannerController {
 
     @PostMapping(value = "scanners")
     public String scanners(@ModelAttribute("staticScanner") StaticScanner staticScanner,
-                           @RequestParam String userId, @RequestParam String name, @RequestParam String ipAddress) throws InterruptedException {
+                           @RequestParam String userId, @RequestParam String testName, @RequestParam String ipAddress,
+                           @RequestParam String productName, String wumLevel) throws InterruptedException {
         staticScanner.setUserId(userId);
-        staticScanner.setName(name);
+        staticScanner.setTestName(testName);
         staticScanner.setIpAddress(ipAddress);
-        LOGGER.info(userId);
-        LOGGER.info(name);
-        LOGGER.info(ipAddress);
+        staticScanner.setProductName(productName);
+        staticScanner.setWumLevel(wumLevel);
         return "staticScanner/scanners";
     }
 
@@ -86,10 +82,6 @@ public class StaticScannerController {
                             @RequestParam(required = false) String url,
                             @RequestParam(required = false) String branch,
                             @RequestParam(required = false) String tag) {
-
-        LOGGER.info(staticScanner.getUserId());
-        LOGGER.info(staticScanner.getName());
-        LOGGER.info(staticScanner.getIpAddress());
         String response = staticScannerService.startScan(staticScanner, isFileUpload, zipFile, url, branch, tag);
         LOGGER.info("Start static scanner response: " + response);
         return "common/myScans";

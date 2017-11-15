@@ -19,7 +19,6 @@ package org.wso2.security.tools.am.webapp.controller;/*
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +26,6 @@ import org.wso2.security.tools.am.webapp.entity.DynamicScanner;
 import org.wso2.security.tools.am.webapp.service.DynamicScannerService;
 
 @Controller
-@Scope("session")
 @SessionAttributes({"dynamicScanner", "message"})
 @RequestMapping("dynamicScanner")
 public class DynamicScannerController {
@@ -59,28 +57,24 @@ public class DynamicScannerController {
 
     @PostMapping(value = "scanner")
     public String scanner(@ModelAttribute("dynamicScanner") DynamicScanner dynamicScanner,
-                          @RequestParam String userId, @RequestParam String name, @RequestParam String ipAddress) throws InterruptedException {
+                          @RequestParam String userId, @RequestParam String testName, @RequestParam String ipAddress,
+                          @RequestParam String productName, @RequestParam String wumLevel) throws InterruptedException {
         dynamicScanner.setUserId(userId);
-        dynamicScanner.setName(name);
+        dynamicScanner.setTestName(testName);
         dynamicScanner.setIpAddress(ipAddress);
-        System.out.println(dynamicScanner.getUserId());
-        System.out.println(dynamicScanner.getIpAddress());
-        System.out.println(dynamicScanner.getName());
+        dynamicScanner.setProductName(productName);
+        dynamicScanner.setWumLevel(wumLevel);
         return "dynamicScanner/scanner";
     }
 
     @GetMapping(value = "scanner")
     public String scanner(@ModelAttribute("dynamicScanner") DynamicScanner dynamicScanner, @ModelAttribute("message") String message) throws InterruptedException {
-        System.out.println(dynamicScanner.getName());
-        System.out.println(dynamicScanner.getUserId());
-        System.out.println(dynamicScanner.getIpAddress());
-
         return "dynamicScanner/scanner";
     }
-    
+
     @PostMapping(value = "startScan")
     public String startScan(@ModelAttribute("dynamicScanner") DynamicScanner dynamicScanner,
-//                            @ModelAttribute("message") String message,
+                            @ModelAttribute("message") String message,
                             @RequestParam MultipartFile urlListFile,
                             @RequestParam boolean isFileUpload,
                             @RequestParam(required = false) MultipartFile zipFile,
@@ -88,13 +82,10 @@ public class DynamicScannerController {
                             @RequestParam(required = false, defaultValue = "-1") int wso2ServerPort,
                             @RequestParam boolean isAuthenticatedScan) {
 
-        System.out.println(dynamicScanner.getName());
-        System.out.println(dynamicScanner.getUserId());
-        System.out.println(dynamicScanner.getIpAddress());
-//        String response = dynamicScannerService.startScan(dynamicScanner, urlListFile, isFileUpload, zipFile, wso2ServerHost, wso2ServerPort,
-//                isAuthenticatedScan);
-//        LOGGER.info("Response from start scan: " + response);
-//        setMessage(response);
+        String response = dynamicScannerService.startScan(dynamicScanner, urlListFile, isFileUpload, zipFile, wso2ServerHost, wso2ServerPort,
+                isAuthenticatedScan);
+        LOGGER.info("Response from start scan: " + response);
+        setMessage(response);
 
         return "dynamicScanner/scanner";
 

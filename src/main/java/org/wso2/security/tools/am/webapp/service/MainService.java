@@ -34,19 +34,19 @@ import java.util.Map;
 @PropertySource("classpath:global.properties")
 public class MainService {
 
-    @Value("${AUTOMATION_MANAGER_HOST}")
+    @Value("${automation.manager.host}")
     private String automationManagerHost;
 
-    @Value("${AUTOMATION_MANAGER_PORT}")
+    @Value("${automation.manager.port}")
     private int automationManagerPort;
 
-    @Value("${AUTOMATION_MANAGER_HTTPS_PORT}")
+    @Value("${automation.manager.https-port}")
     private int automationManagerHttpsPort;
 
-    @Value("${GET_STATIC_SCANNERS}")
+    @Value("${get.static.scanners}")
     private String getStaticScanners;
 
-    @Value("${GET_DYNAMIC_SCANNERS}")
+    @Value("${get.dynamic.scanners}")
     private String getDynamicScanners;
 
 

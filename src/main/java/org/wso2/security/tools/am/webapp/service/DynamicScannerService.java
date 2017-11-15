@@ -16,6 +16,7 @@ package org.wso2.security.tools.am.webapp.service;/*
 * under the License.
 */
 
+import org.apache.http.HttpStatus;
 import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,74 +26,84 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.am.webapp.entity.DynamicScanner;
 import org.wso2.security.tools.am.webapp.handlers.MultipartUtility;
+import org.wso2.security.tools.am.webapp.handlers.TokenHandler;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 
 @Service
 @PropertySource("classpath:global.properties")
 public class DynamicScannerService {
 
-    @Value("${AUTOMATION_MANAGER_HOST}")
+    @Value("${automation.manager.host}")
     private String automationManagerHost;
 
-    @Value("${AUTOMATION_MANAGER_HTTPS_PORT}")
+    @Value("${automation.manager.https-port}")
     private int automationManagerPort;
 
-    @Value("${START_DYNAMIC_SCAN}")
+    @Value("${dynamic-scanner.start-scan}")
     private String startScan;
 
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
+
     public String startScan(DynamicScanner dynamicScanner, MultipartFile urlListFile, boolean isFileUpload, MultipartFile zipFile,
                             String wso2ServerHost, int wso2ServerPort, boolean isAuthenticatedScan) {
-        try {
-            System.out.println(dynamicScanner.getIpAddress());
-            System.out.println(dynamicScanner.getUserId());
-            if (isFileUpload) {
-                if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
-                    return "Please upload a zip file";
+
+        String accessToken = TokenHandler.getAccessToken();
+        int i = 0;
+        while (i < 10) {
+            try {
+                if (isFileUpload) {
+                    if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
+                        return "Please upload a zip file";
+                    }
+                } else {
+                    if (wso2ServerHost == null || wso2ServerPort == -1) {
+                        return "Please enter wso2 server host and port";
+                    }
                 }
-            } else {
-                if (wso2ServerHost == null || wso2ServerPort == -1) {
-                    return "Please enter wso2 server host and port";
+
+
+                URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("https").setPath(startScan)
+                        .build();
+
+                String charset = "UTF-8";
+
+                MultipartUtility multipartRequest = new MultipartUtility(uri.toString(), charset, accessToken);
+                multipartRequest.addFormField("userId", dynamicScanner.getUserId());
+                multipartRequest.addFormField("testName", dynamicScanner.getTestName());
+                multipartRequest.addFormField("ipAddress", dynamicScanner.getIpAddress());
+                multipartRequest.addFormField("productName", dynamicScanner.getProductName());
+                multipartRequest.addFormField("wumLevel", dynamicScanner.getWumLevel());
+                multipartRequest.addFormField("isFileUpload", String.valueOf(isFileUpload));
+                multipartRequest.addFormField("isAuthenticatedScan", String.valueOf(isAuthenticatedScan));
+                multipartRequest.addFilePart("urlListFile", urlListFile.getInputStream(), urlListFile.getOriginalFilename());
+
+                if (isFileUpload) {
+                    multipartRequest.addFilePart("zipFile", zipFile.getInputStream(), zipFile.getOriginalFilename());
+
+                } else {
+                    multipartRequest.addFormField("wso2ServerHost", wso2ServerHost);
+                    multipartRequest.addFormField("wso2ServerPort", String.valueOf(wso2ServerPort));
                 }
+                multipartRequest.finish();
+                LOGGER.info("SERVER REPLIED:");
+
+                if (multipartRequest.getResponseStatus() == HttpStatus.SC_OK) {
+                    return "Ok";
+                }
+                Thread.sleep(1000);
+
+
+            } catch (URISyntaxException | IOException | InterruptedException e) {
+                e.printStackTrace();
+                TokenHandler.setAccessToken();
+                accessToken = TokenHandler.getAccessToken();
+                i += 1;
             }
-
-            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("https").setPath(startScan)
-                    .build();
-
-            String charset = "UTF-8";
-
-            MultipartUtility multipartRequest = new MultipartUtility(uri.toString(), charset);
-
-            multipartRequest.addFormField("userId", dynamicScanner.getUserId());
-            multipartRequest.addFormField("name", dynamicScanner.getName());
-            multipartRequest.addFormField("ipAddress", dynamicScanner.getIpAddress());
-            multipartRequest.addFormField("isFileUpload", String.valueOf(isFileUpload));
-            multipartRequest.addFormField("isAuthenticatedScan", String.valueOf(isAuthenticatedScan));
-            multipartRequest.addFilePart("urlListFile", urlListFile.getInputStream(), urlListFile.getOriginalFilename());
-
-            if (isFileUpload) {
-                multipartRequest.addFilePart("zipFile", zipFile.getInputStream(), zipFile.getOriginalFilename());
-
-            } else {
-                multipartRequest.addFormField("wso2ServerHost", wso2ServerHost);
-                multipartRequest.addFormField("wso2ServerPort", String.valueOf(wso2ServerPort));
-            }
-
-            List<String> response = multipartRequest.finish();
-            LOGGER.info("SERVER REPLIED:");
-
-            for (String line : response) {
-                LOGGER.info(line);
-            }
-            return "Ok";
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-            return e.getMessage();
         }
+        return "Error response";
     }
 }

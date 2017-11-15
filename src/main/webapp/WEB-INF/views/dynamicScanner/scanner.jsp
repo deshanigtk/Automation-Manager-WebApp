@@ -24,8 +24,7 @@
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Upload a zip file</h2>
                 <p>Upload a zip file of the product</p>
-                <form action="/dynamicScanner/startScan" method="post"
-                      enctype="multipart/form-data">
+                <form action="/dynamicScanner/startScan" method="post" enctype="multipart/form-data">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Zip File</span>
                         <input type="file" name="zipFile" class="form-control" required>
@@ -44,16 +43,7 @@
                         <label class="form-control">Authenticated Scan</label>
                     </div>
                     <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">
-                            <input type="checkbox" name="isUnauthenticatedScan" checked>
-                            <input type="hidden" name="isUnauthenticatedScan" value="1">
-                        </span>
-                        <label class="form-control">Unauthenticated Scan</label>
-                    </div>
-                    <br>
                     <input type="hidden" name="isFileUpload" value="true">
-                    <%=session.getAttribute("dynamicScanner.getName()")%>
                     <button class="btn btn-primary btn-block">Submit and Start Scan</button>
                 </form>
             </div>
@@ -62,7 +52,7 @@
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Enter Details of Server</h2>
                 <p>Enter Details of up and running server</p>
-                <form action="/dynamicScanner/startScan" method="post">
+                <form action="/dynamicScanner/startScan" method="post" enctype="multipart/form-data">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">IP Address</span>
                         <input name="wso2ServerHost" class="form-control">
@@ -84,14 +74,6 @@
                             <input type="hidden" name="isAuthenticatedScan" value="0">
                         </span>
                         <label class="form-control">Authenticated Scan</label>
-                    </div>
-                    <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">
-                            <input type="checkbox" name="isUnauthenticatedScan">
-                            <input type="hidden" name="isUnauthenticatedScan" value="0">
-                        </span>
-                        <label class="form-control">Unauthenticated Scan</label>
                     </div>
                     <br>
                     <input type="hidden" name="isFileUpload" value="false">

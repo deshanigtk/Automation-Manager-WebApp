@@ -16,6 +16,7 @@ package org.wso2.security.tools.am.webapp.service;/*
 * under the License.
 */
 
+import org.apache.http.HttpStatus;
 import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,80 +26,83 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.am.webapp.entity.StaticScanner;
 import org.wso2.security.tools.am.webapp.handlers.MultipartUtility;
+import org.wso2.security.tools.am.webapp.handlers.TokenHandler;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.List;
 
 @Service
 @PropertySource("classpath:global.properties")
 public class StaticScannerService {
 
-    @Value("${AUTOMATION_MANAGER_HOST}")
+    @Value("${automation.manager.host}")
     private String automationManagerHost;
 
-    @Value("${AUTOMATION_MANAGER_HTTPS_PORT}")
+    @Value("${automation.manager.https-port}")
     private int automationManagerPort;
 
-    @Value("${START_STATIC_SCAN}")
+    @Value("${static-scanner.start-scan}")
     private String startScan;
 
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     public String startScan(StaticScanner staticScanner, boolean isFileUpload, MultipartFile zipFile,
                             String url, String branch, String tag) {
-        try {
+        String accessToken = TokenHandler.getAccessToken();
+        int i = 0;
+        while (i < 10) {
+            try {
+                if (isFileUpload) {
+                    if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
+                        return "Please upload a zip file";
+                    }
+                } else {
+                    if (url == null) {
+                        return "Please enter a URL to clone";
+                    }
+                }
 
-            if (isFileUpload) {
-                if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
-                    return "Please upload a zip file";
+                URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("https").setPath(startScan)
+                        .build();
+
+                String charset = "UTF-8";
+
+                MultipartUtility multipartRequest = new MultipartUtility(uri.toString(), charset, accessToken);
+
+                multipartRequest.addFormField("userId", staticScanner.getUserId());
+                multipartRequest.addFormField("testName", staticScanner.getTestName());
+                multipartRequest.addFormField("ipAddress", staticScanner.getIpAddress());
+                multipartRequest.addFormField("productName", staticScanner.getProductName());
+                multipartRequest.addFormField("wumLevel", staticScanner.getWumLevel());
+                multipartRequest.addFormField("isFileUpload", String.valueOf(isFileUpload));
+                multipartRequest.addFormField("isFindSecBugs", String.valueOf(staticScanner.isFindSecBugs()));
+                multipartRequest.addFormField("isDependencyCheck", String.valueOf(staticScanner.isDependencyCheck()));
+
+                if (isFileUpload) {
+                    multipartRequest.addFilePart("zipFile", zipFile.getInputStream(), zipFile.getOriginalFilename());
+
+                } else {
+                    multipartRequest.addFormField("url", url);
+                    if (branch != null) {
+                        multipartRequest.addFormField("branch", branch);
+                    }
+                    if (tag != null) {
+                        multipartRequest.addFormField("tag", tag);
+                    }
                 }
-            } else {
-                if (url == null) {
-                    return "Please enter a URL to clone";
+                multipartRequest.finish();
+                if (multipartRequest.getResponseStatus() == HttpStatus.SC_OK) {
+                    return "Ok";
                 }
+                Thread.sleep(1000);
+
+            } catch (URISyntaxException | IOException | InterruptedException e) {
+                e.printStackTrace();
+                TokenHandler.setAccessToken();
+                accessToken = TokenHandler.getAccessToken();
+                i += 1;
             }
-
-            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("https").setPath(startScan)
-                    .build();
-
-            String charset = "UTF-8";
-
-            MultipartUtility multipartRequest = new MultipartUtility(uri.toString(), charset);
-
-            multipartRequest.addFormField("userId", staticScanner.getUserId());
-            multipartRequest.addFormField("name", staticScanner.getName());
-            multipartRequest.addFormField("ipAddress", staticScanner.getIpAddress());
-            multipartRequest.addFormField("isFileUpload", String.valueOf(isFileUpload));
-            multipartRequest.addFormField("isFindSecBugs", String.valueOf(staticScanner.isFindSecBugs()));
-            multipartRequest.addFormField("isDependencyCheck", String.valueOf(staticScanner.isDependencyCheck()));
-
-            if (isFileUpload) {
-                multipartRequest.addFilePart("zipFile", zipFile.getInputStream(), zipFile.getOriginalFilename());
-
-            } else {
-                multipartRequest.addFormField("url", url);
-                if (branch != null) {
-                    multipartRequest.addFormField("branch", branch);
-                }
-                if (tag != null) {
-                    multipartRequest.addFormField("tag", tag);
-                }
-            }
-
-            List<String> response = multipartRequest.finish();
-            LOGGER.info("SERVER REPLIED:");
-
-            for (String line : response) {
-               LOGGER.info(line);
-            }
-            return "Ok";
-
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-            return "Failed to execute start static scanner request";
         }
-
+        return "Error response";
     }
-
 }

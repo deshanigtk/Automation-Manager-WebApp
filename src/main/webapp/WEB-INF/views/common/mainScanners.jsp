@@ -31,7 +31,17 @@
                     <br>
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Test Name</span>
-                        <input name="name" class="form-control" placeholder="Please enter a name to test" required>
+                        <input name="testName" class="form-control" placeholder="Please enter a name to test" required>
+                    </div>
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon">Product Name</span>
+                        <input name="productName" class="form-control" placeholder="Please enter the product name" required>
+                    </div>
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon">WUM Level</span>
+                        <input name="wumLevel" class="form-control" placeholder="Please enter WUM level of the product" required>
                     </div>
                     <br>
                     <button name="btnStartStaticScanner" class="btn btn-primary btn-block">
@@ -60,7 +70,17 @@
                     <br>
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Test Name</span>
-                        <input name="name" class="form-control" placeholder="Please enter a name to test" required>
+                        <input name="testName" class="form-control" placeholder="Please enter a name to test" required>
+                    </div>
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon">Product Name</span>
+                        <input name="productName" class="form-control" placeholder="Please enter the product name" required>
+                    </div>
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon">WUM Level</span>
+                        <input name="wumLevel" class="form-control" placeholder="Please enter WUM level of the product" required>
                     </div>
                     <br>
                     <button name="btnStartDynamicScanner" class="btn btn-primary btn-block">

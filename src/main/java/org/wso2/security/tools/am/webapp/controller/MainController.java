@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.wso2.security.tools.am.webapp.service.MainService;
 
 @Controller
@@ -44,11 +45,12 @@ public class MainController {
     }
 
     @GetMapping(value = "myScanners")
-    public String getMyScans(String userId, Model model) {
+    public String getMyScans(@RequestParam String userId, Model model) {
         JSONArray[] scanners = mainService.getMyScanners(userId);
         model.addAttribute("staticScanners", scanners[0]);
-        model.addAttribute("dynamicScanners", scanners[1]);
+//        model.addAttribute("dynamicScanners", scanners[1]);
+        model.addAttribute("dynamicScanners", new String[]{});
+
         return "common/myScans";
     }
-
 }

@@ -30,7 +30,7 @@
                                     <tbody>
                                     <tr>
                                         <th>Test Name</th>
-                                        <td> ${dynamicScanners.getJSONObject(index).getString("name")}</td>
+                                        <td> ${dynamicScanners.getJSONObject(index).getString("testName")}</td>
                                     </tr>
                                     <tr>
                                         <th>Container Status</th>
@@ -129,7 +129,7 @@
                                     <tbody>
                                     <tr>
                                         <th>Test Name</th>
-                                        <td>${staticScanners.getJSONObject(index).getString("name")}</td>
+                                        <td>${staticScanners.getJSONObject(index).getString("testName")}</td>
                                     </tr>
                                     <tr>
                                         <th>Container Status</th>

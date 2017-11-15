@@ -16,6 +16,8 @@ package org.wso2.security.tools.am.webapp.handlers;/*
 * under the License.
 */
 
+import org.apache.http.HttpStatus;
+
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -79,7 +81,7 @@ public class MultipartUtility {
      * @throws IOException
      */
 
-    public MultipartUtility(String requestURL, String charset) throws IOException {
+    public MultipartUtility(String requestURL, String charset, String accessToken) throws IOException {
         init();
         if (isInitialized) {
             this.charset = charset;
@@ -94,7 +96,7 @@ public class MultipartUtility {
             httpsURLConnection.setDoOutput(true); // indicates POST method
             httpsURLConnection.setDoInput(true);
             httpsURLConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-            httpsURLConnection.setRequestProperty("Authorization", "Bearer 50e156bc-a28e-34b7-9921-f5eaa944920d");
+            httpsURLConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
             outputStream = httpsURLConnection.getOutputStream();
             writer = new PrintWriter(new OutputStreamWriter(outputStream, charset), true);
         }
@@ -155,6 +157,7 @@ public class MultipartUtility {
         writer.flush();
     }
 
+
     /**
      * Completes the request and receives response from the server.
      *
@@ -162,8 +165,8 @@ public class MultipartUtility {
      * status OK, otherwise an exception is thrown.
      * @throws IOException
      */
-    public List<String> finish() throws IOException {
-        List<String> response = new ArrayList<String>();
+    public void finish() throws IOException {
+        List<String> response = new ArrayList<>();
 
         writer.append(LINE_FEED).flush();
         writer.append("--").append(boundary).append("--").append(LINE_FEED);
@@ -172,8 +175,7 @@ public class MultipartUtility {
         // checks server's status code first
         int status = httpsURLConnection.getResponseCode();
         if (status == HttpsURLConnection.HTTP_OK) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    httpsURLConnection.getInputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream()));
             String line = null;
             while ((line = reader.readLine()) != null) {
                 response.add(line);
@@ -183,7 +185,9 @@ public class MultipartUtility {
         } else {
             throw new IOException("Server returned non-OK status: " + status);
         }
+    }
 
-        return response;
+    public int getResponseStatus() throws IOException {
+        return httpsURLConnection.getResponseCode();
     }
 }

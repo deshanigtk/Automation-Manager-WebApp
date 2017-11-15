@@ -20,13 +20,12 @@ package org.wso2.security.tools.am.webapp.entity;
 public class StaticScanner {
 
     private String userId;
-    private String name;
+    private String testName;
     private String ipAddress;
+    private String productName;
+    private String wumLevel;
     private boolean isFindSecBugs;
     private boolean isDependencyCheck;
-
-//    public StaticScanner() {
-//    }
 
     public void setUserId(String userId) {
         this.userId = userId;
@@ -36,8 +35,16 @@ public class StaticScanner {
         this.ipAddress = ipAddress;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTestName(String testName) {
+        this.testName = testName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setWumLevel(String wumLevel) {
+        this.wumLevel = wumLevel;
     }
 
     public void setFindSecBugs(boolean findSecBugs) {
@@ -52,12 +59,20 @@ public class StaticScanner {
         return userId;
     }
 
-    public String getName() {
-        return name;
+    public String getTestName() {
+        return testName;
     }
 
     public String getIpAddress() {
         return ipAddress;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getWumLevel() {
+        return wumLevel;
     }
 
     public boolean isFindSecBugs() {

@@ -92,11 +92,10 @@ public class HttpsRequestHandler {
             }
         }
         try {
-            URL url = new URL(link);
+            URL url = new URL(link );
             if (requestParams != null) {
                 url = new URL(url.toString() + "?" + postData);
             }
-            System.out.println(url);
 
             httpsURLConnection = (HttpsURLConnection) url.openConnection();
             httpsURLConnection.setSSLSocketFactory(sslSocketFactory);
@@ -109,6 +108,7 @@ public class HttpsRequestHandler {
                 }
             }
             return httpsURLConnection;
+
 
         } catch (IOException e) {
             throw new RequestAbortedException("Https request aborted");
@@ -179,9 +179,4 @@ public class HttpsRequestHandler {
         return null;
     }
 
-
-    public static SSLSocketFactory getSSLContext() {
-        init();
-        return sslSocketFactory;
-    }
 }
