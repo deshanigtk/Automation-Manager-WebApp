@@ -16,20 +16,26 @@ package org.wso2.security.tools.am.webapp.service;/*
 * under the License.
 */
 
+import org.apache.http.HttpStatus;
 import org.apache.http.client.utils.URIBuilder;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.wso2.security.tools.am.webapp.handlers.HttpsRequestHandler;
+import org.wso2.security.tools.am.webapp.handlers.TokenHandler;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Deshani Geethika
+ */
 @Service
 @PropertySource("classpath:global.properties")
 public class MainService {
@@ -51,42 +57,49 @@ public class MainService {
 
 
     public JSONArray[] getMyScanners(String userId) {
-        try {
-            JSONArray[] scannersArray = new JSONArray[2];
-            URI uriToGetStaticScanners = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerHttpsPort)
-                    .setScheme("https").setPath(getStaticScanners)
-                    .addParameter("userId", userId)
-                    .build();
+        String accessToken = TokenHandler.getAccessToken();
+        int i = 0;
+        while (i < 10) {
+            try {
+                JSONArray[] scannersArray = new JSONArray[2];
+                URI uriToGetStaticScanners = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerHttpsPort)
+                        .setScheme("https").setPath(getStaticScanners)
+                        .addParameter("userId", userId)
+                        .build();
 
-            URI uriToGetDynamicScanners = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerHttpsPort)
-                    .setScheme("https").setPath(getDynamicScanners)
-                    .addParameter("userId", userId)
-                    .build();
+                URI uriToGetDynamicScanners = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerHttpsPort)
+                        .setScheme("https").setPath(getDynamicScanners)
+                        .addParameter("userId", userId)
+                        .build();
 
-            Map<String, String> headers = new HashMap<>();
-            headers.put("Authorization", "Bearer 50e156bc-a28e-34b7-9921-f5eaa944920d");
+                HttpsURLConnection httpsURLConnection = HttpsRequestHandler.sendRequest(uriToGetStaticScanners.toString(), null, null, "GET", accessToken);
 
-            HttpsURLConnection httpsURLConnection = HttpsRequestHandler.sendRequest(uriToGetStaticScanners.toString(), headers, null, "GET");
+                if (httpsURLConnection.getResponseCode() == HttpStatus.SC_OK) {
+                    String jsonString = HttpsRequestHandler.getResponseAsString(httpsURLConnection);
 
-            String jsonString = HttpsRequestHandler.getResponseAsString(httpsURLConnection);
+                    if (jsonString != null) {
+                        scannersArray[0] = new JSONArray(jsonString);
+                    }
+                }
 
-            if (jsonString != null) {
-                scannersArray[0] = new JSONArray(jsonString);
+                httpsURLConnection = HttpsRequestHandler.sendRequest(uriToGetDynamicScanners.toString(), null, null, "GET", accessToken);
+
+                if (httpsURLConnection.getResponseCode() == HttpStatus.SC_OK) {
+                    String jsonString = HttpsRequestHandler.getResponseAsString(httpsURLConnection);
+                    if (jsonString != null) {
+                        scannersArray[1] = new JSONArray(jsonString);
+                    }
+                }
+                return scannersArray;
+
+            } catch (URISyntaxException | IOException e) {
+                e.printStackTrace();
+                TokenHandler.generateAccessToken();
+                accessToken = TokenHandler.getAccessToken();
+                i += 1;
             }
-
-            httpsURLConnection = HttpsRequestHandler.sendRequest(uriToGetDynamicScanners.toString(), headers, null, "GET");
-
-            jsonString = HttpsRequestHandler.getResponseAsString(httpsURLConnection);
-
-            if (jsonString != null) {
-                scannersArray[1] = new JSONArray(jsonString);
-            }
-
-            return scannersArray;
-
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
         }
         return null;
     }
+
 }

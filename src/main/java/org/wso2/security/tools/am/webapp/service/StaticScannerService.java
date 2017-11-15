@@ -25,12 +25,15 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.am.webapp.entity.StaticScanner;
-import org.wso2.security.tools.am.webapp.handlers.MultipartUtility;
+import org.wso2.security.tools.am.webapp.handlers.MultipartRequestHandler;
 import org.wso2.security.tools.am.webapp.handlers.TokenHandler;
 
 import java.io.IOException;
 import java.net.*;
 
+/**
+ * @author Deshani Geethika
+ */
 @Service
 @PropertySource("classpath:global.properties")
 public class StaticScannerService {
@@ -67,7 +70,7 @@ public class StaticScannerService {
 
                 String charset = "UTF-8";
 
-                MultipartUtility multipartRequest = new MultipartUtility(uri.toString(), charset, accessToken);
+                MultipartRequestHandler multipartRequest = new MultipartRequestHandler(uri.toString(), charset, accessToken);
 
                 multipartRequest.addFormField("userId", staticScanner.getUserId());
                 multipartRequest.addFormField("testName", staticScanner.getTestName());

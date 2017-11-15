@@ -1,4 +1,4 @@
-package org.wso2.security.tools.am.webapp.config;/*
+/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -15,12 +15,16 @@ package org.wso2.security.tools.am.webapp.config;/*
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.am.webapp.config;
 
 import org.springframework.stereotype.Component;
 import org.wso2.security.tools.am.webapp.handlers.TokenHandler;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * @author Deshani Geethika
+ */
 @Component
 public class StartUpInit {
 

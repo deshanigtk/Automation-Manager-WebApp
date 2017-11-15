@@ -1,4 +1,4 @@
-package org.wso2.security.tools.am.webapp.controller;/*
+/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -15,6 +15,7 @@ package org.wso2.security.tools.am.webapp.controller;/*
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.am.webapp.controller;
 
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.wso2.security.tools.am.webapp.service.MainService;
 
+/**
+ * @author Deshani Geethika
+ */
 @Controller
 public class MainController {
 
@@ -47,8 +51,10 @@ public class MainController {
     @GetMapping(value = "myScanners")
     public String getMyScans(@RequestParam String userId, Model model) {
         JSONArray[] scanners = mainService.getMyScanners(userId);
-        model.addAttribute("staticScanners", scanners[0]);
-        model.addAttribute("dynamicScanners", scanners[1]);
+        if (scanners != null) {
+            model.addAttribute("staticScanners", scanners[0]);
+            model.addAttribute("dynamicScanners", scanners[1]);
+        }
         return "common/myScans";
     }
 }

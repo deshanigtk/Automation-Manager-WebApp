@@ -1,4 +1,4 @@
-package org.wso2.security.tools.am.webapp.controller;/*
+/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -15,6 +15,7 @@ package org.wso2.security.tools.am.webapp.controller;/*
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.am.webapp.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.am.webapp.entity.StaticScanner;
 import org.wso2.security.tools.am.webapp.service.StaticScannerService;
 
+/**
+ * @author Deshani Geethika
+ */
 @Controller
 @SessionAttributes("staticScanner")
 @RequestMapping(value = "staticScanner")

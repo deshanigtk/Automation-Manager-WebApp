@@ -25,13 +25,16 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.am.webapp.entity.DynamicScanner;
-import org.wso2.security.tools.am.webapp.handlers.MultipartUtility;
+import org.wso2.security.tools.am.webapp.handlers.MultipartRequestHandler;
 import org.wso2.security.tools.am.webapp.handlers.TokenHandler;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * @author Deshani Geethika
+ */
 @Service
 @PropertySource("classpath:global.properties")
 public class DynamicScannerService {
@@ -69,7 +72,7 @@ public class DynamicScannerService {
 
                 String charset = "UTF-8";
 
-                MultipartUtility multipartRequest = new MultipartUtility(uri.toString(), charset, accessToken);
+                MultipartRequestHandler multipartRequest = new MultipartRequestHandler(uri.toString(), charset, accessToken);
                 multipartRequest.addFormField("userId", dynamicScanner.getUserId());
                 multipartRequest.addFormField("testName", dynamicScanner.getTestName());
                 multipartRequest.addFormField("ipAddress", dynamicScanner.getIpAddress());

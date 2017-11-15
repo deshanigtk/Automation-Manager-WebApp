@@ -1,4 +1,4 @@
-package org.wso2.security.tools.am.webapp.controller;/*
+/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -15,6 +15,7 @@ package org.wso2.security.tools.am.webapp.controller;/*
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.am.webapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.wso2.security.tools.am.webapp.entity.User;
 
-
+/**
+ * @author Deshani Geethika
+ */
 @SessionAttributes("user")
 @Controller
 public class UserController {

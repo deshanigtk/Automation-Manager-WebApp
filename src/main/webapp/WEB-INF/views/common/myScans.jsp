@@ -22,7 +22,7 @@
         <div class="col-lg-12">
             <h3>Dynamic Scanners</h3>
             <c:choose>
-                <c:when test="${dynamicScanners!=null}">
+                <c:when test="${dynamicScanners.length()!=0}">
                     <c:forEach begin="0" end="${dynamicScanners.length()-1}" var="index">
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="thumbnail">
@@ -114,14 +114,14 @@
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
-                    <p>No Dynamic scans are found</p>
+                    <p>No dynamic scans are found</p>
                 </c:otherwise>
             </c:choose>
         </div>
         <div class="col-lg-12">
             <h3>Static Scanners</h3>
             <c:choose>
-                <c:when test="${staticScanners!=null}">
+                <c:when test="${staticScanners.length()!=0}">
                     <c:forEach begin="0" end="${staticScanners.length()-1}" var="index">
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="thumbnail">
@@ -163,10 +163,10 @@
                                     </tr>
                                     </c:if>
 
-                                    <%--<tr>--%>
+                                        <%--<tr>--%>
                                         <%--<th>FindSecBugs Status</th>--%>
                                         <%--<td> ${staticScanners.getJSONObject(index).getString("findSecBugsStatus")}</td>--%>
-                                    <%--</tr>--%>
+                                        <%--</tr>--%>
                                     <tr>
                                         <th>FindSecBugs Report Ready</th>
                                         <td> ${staticScanners.getJSONObject(index).getBoolean("findSecBugsReportReady")}</td>
@@ -178,10 +178,10 @@
                                     </tr>
                                     </c:if>
 
-                                    <%--<tr>--%>
+                                        <%--<tr>--%>
                                         <%--<th>Dependency Check Status</th>--%>
                                         <%--<td> ${staticScanners.getJSONObject(index).getString("dependencyCheckStatus")}</td>--%>
-                                    <%--</tr>--%>
+                                        <%--</tr>--%>
                                     <tr>
                                         <th>Dependency Check Report Ready</th>
                                         <td> ${staticScanners.getJSONObject(index).getBoolean("dependencyCheckReportReady")}</td>
