@@ -17,16 +17,18 @@ package org.wso2.security.tools.am.webapp.controller;/*
 */
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.wso2.security.tools.am.webapp.entity.User;
 
+
+@SessionAttributes("user")
 @Controller
 public class UserController {
-//    @GetMapping(value = "/signin")
-//    public String signIn() {
-//        return "signin/signin";
-//    }
-//
-//    @GetMapping(value = "/mainScanners")
-//    public String index() {
-//        return "scanners";
-//    }
+
+    @PostMapping(value = "authUser")
+    public void authUser(@ModelAttribute("user") User user, @RequestParam String JWT) {
+    }
 }

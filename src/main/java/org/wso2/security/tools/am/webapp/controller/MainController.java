@@ -48,9 +48,7 @@ public class MainController {
     public String getMyScans(@RequestParam String userId, Model model) {
         JSONArray[] scanners = mainService.getMyScanners(userId);
         model.addAttribute("staticScanners", scanners[0]);
-//        model.addAttribute("dynamicScanners", scanners[1]);
-        model.addAttribute("dynamicScanners", new String[]{});
-
+        model.addAttribute("dynamicScanners", scanners[1]);
         return "common/myScans";
     }
 }

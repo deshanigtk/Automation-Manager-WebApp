@@ -27,7 +27,7 @@ import java.util.Map;
 public class TokenHandler {
     private static String accessToken;
 
-    public static void setAccessToken() {
+    public static void generateAccessToken() {
         try {
             Map<String, Object> requestParams = new HashMap<>();
             requestParams.put("grant_type", "client_credentials");

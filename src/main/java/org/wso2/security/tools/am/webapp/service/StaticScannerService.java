@@ -98,7 +98,7 @@ public class StaticScannerService {
 
             } catch (URISyntaxException | IOException | InterruptedException e) {
                 e.printStackTrace();
-                TokenHandler.setAccessToken();
+                TokenHandler.generateAccessToken();
                 accessToken = TokenHandler.getAccessToken();
                 i += 1;
             }

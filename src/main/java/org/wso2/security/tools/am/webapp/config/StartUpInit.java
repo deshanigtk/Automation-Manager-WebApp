@@ -26,6 +26,6 @@ public class StartUpInit {
 
     @PostConstruct
     public void init() {
-        TokenHandler.setAccessToken();
+        TokenHandler.generateAccessToken();
     }
 }

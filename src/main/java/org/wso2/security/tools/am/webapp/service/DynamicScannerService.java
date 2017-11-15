@@ -64,8 +64,6 @@ public class DynamicScannerService {
                         return "Please enter wso2 server host and port";
                     }
                 }
-
-
                 URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("https").setPath(startScan)
                         .build();
 
@@ -99,7 +97,7 @@ public class DynamicScannerService {
 
             } catch (URISyntaxException | IOException | InterruptedException e) {
                 e.printStackTrace();
-                TokenHandler.setAccessToken();
+                TokenHandler.generateAccessToken();
                 accessToken = TokenHandler.getAccessToken();
                 i += 1;
             }

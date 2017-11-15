@@ -20,7 +20,6 @@ package org.wso2.security.tools.am.webapp.entity;
 
 public class User {
 
-    private Long id;
     private String name;
     private String email;
 
@@ -30,10 +29,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {

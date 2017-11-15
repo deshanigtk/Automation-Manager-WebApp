@@ -26,13 +26,11 @@ import org.wso2.security.tools.am.webapp.entity.DynamicScanner;
 import org.wso2.security.tools.am.webapp.service.DynamicScannerService;
 
 @Controller
-@SessionAttributes({"dynamicScanner", "message"})
+@SessionAttributes({"dynamicScanner"})
 @RequestMapping("dynamicScanner")
 public class DynamicScannerController {
 
     private final DynamicScannerService dynamicScannerService;
-
-    private String message = "";
 
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
@@ -44,15 +42,6 @@ public class DynamicScannerController {
     @ModelAttribute("dynamicScanner")
     public DynamicScanner getDynamicScanner() {
         return new DynamicScanner();
-    }
-
-    @ModelAttribute("message")
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     @PostMapping(value = "scanner")
@@ -85,8 +74,6 @@ public class DynamicScannerController {
         String response = dynamicScannerService.startScan(dynamicScanner, urlListFile, isFileUpload, zipFile, wso2ServerHost, wso2ServerPort,
                 isAuthenticatedScan);
         LOGGER.info("Response from start scan: " + response);
-        setMessage(response);
-
         return "dynamicScanner/scanner";
 
     }

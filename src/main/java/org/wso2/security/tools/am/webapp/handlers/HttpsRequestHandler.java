@@ -108,8 +108,6 @@ public class HttpsRequestHandler {
                 }
             }
             return httpsURLConnection;
-
-
         } catch (IOException e) {
             throw new RequestAbortedException("Https request aborted");
         }

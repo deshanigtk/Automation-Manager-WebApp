@@ -16,8 +16,6 @@ package org.wso2.security.tools.am.webapp.handlers;/*
 * under the License.
 */
 
-import org.apache.http.HttpStatus;
-
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -141,7 +139,6 @@ public class MultipartUtility {
         }
         outputStream.flush();
         uploadFile.close();
-
         writer.append(LINE_FEED);
         writer.flush();
     }
