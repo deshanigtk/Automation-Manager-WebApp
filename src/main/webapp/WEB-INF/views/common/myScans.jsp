@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: deshani
-  Date: 10/10/17
-  Time: 12:56 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -22,7 +15,7 @@
         <div class="col-lg-12">
             <h3>Dynamic Scanners</h3>
             <c:choose>
-                <c:when test="${dynamicScanners.length()!=0}">
+                <c:when test="${dynamicScanners.length()!=0 && dynamicScanners!=null}">
                     <c:forEach begin="0" end="${dynamicScanners.length()-1}" var="index">
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="thumbnail">
@@ -121,7 +114,7 @@
         <div class="col-lg-12">
             <h3>Static Scanners</h3>
             <c:choose>
-                <c:when test="${staticScanners.length()!=0}">
+                <c:when test="${staticScanners.length()!=0 && staticScanners!=null}">
                     <c:forEach begin="0" end="${staticScanners.length()-1}" var="index">
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="thumbnail">

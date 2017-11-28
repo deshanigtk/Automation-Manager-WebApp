@@ -14,21 +14,10 @@
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Static Scanner</h2>
-                <p>This scanner will accept a zip file of the source code of the product, or else a GitHub url, with
-                    specific branches and tags. Then Static Scanner can start scanning your source code using
-                    FindSecBugs or/and OWASP Dependency Check.</p>
-                <form action="staticScanner/scanners" method="post">
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">User ID</span>
-                        <input name="userId" class="form-control" placeholder="Enter user ID" required>
-                    </div>
-                    <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">IP Address</span>
-                        <input name="ipAddress" class="form-control"
-                               placeholder="Please enter IP Address to host container" required>
-                    </div>
-                    <br>
+                <p>This scanner will accept a zip file or a GitHub url of the source code of the project. Then
+                    Static Scanner can start scanning your source code usingFindSecBugs or/and OWASP Dependency
+                    Check.</p>
+                <form action="/staticScanner/scanners" method="post">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Test Name</span>
                         <input name="testName" class="form-control" placeholder="Please enter a name to test" required>
@@ -36,12 +25,14 @@
                     <br>
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Product Name</span>
-                        <input name="productName" class="form-control" placeholder="Please enter the product name" required>
+                        <input name="productName" class="form-control" placeholder="Please enter the product name"
+                               required>
                     </div>
                     <br>
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">WUM Level</span>
-                        <input name="wumLevel" class="form-control" placeholder="Please enter WUM level of the product" required>
+                        <input name="wumLevel" class="form-control" placeholder="Please enter WUM level of the product"
+                               required>
                     </div>
                     <br>
                     <button name="btnStartStaticScanner" class="btn btn-primary btn-block">
@@ -56,18 +47,7 @@
                 <p>This scanner will accept a zip file of the product, or else a url of already running server. Then
                     Dynamic Scanner can start scanning your up and running product using OWASP Zed Attack
                     proxy(ZAP).</p>
-                <form action="/dynamicScanner/scanner" method="post">
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">User ID</span>
-                        <input name="userId" class="form-control" placeholder="Enter user ID" required>
-                    </div>
-                    <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">IP Address</span>
-                        <input name="ipAddress" class="form-control"
-                               placeholder="Please enter IP Address to host container" required>
-                    </div>
-                    <br>
+                <form action="/dynamicScanner/scanners" method="post">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Test Name</span>
                         <input name="testName" class="form-control" placeholder="Please enter a name to test" required>
@@ -75,12 +55,14 @@
                     <br>
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Product Name</span>
-                        <input name="productName" class="form-control" placeholder="Please enter the product name" required>
+                        <input name="productName" class="form-control" placeholder="Please enter the product name"
+                               required>
                     </div>
                     <br>
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">WUM Level</span>
-                        <input name="wumLevel" class="form-control" placeholder="Please enter WUM level of the product" required>
+                        <input name="wumLevel" class="form-control" placeholder="Please enter WUM level of the product"
+                               required>
                     </div>
                     <br>
                     <button name="btnStartDynamicScanner" class="btn btn-primary btn-block">

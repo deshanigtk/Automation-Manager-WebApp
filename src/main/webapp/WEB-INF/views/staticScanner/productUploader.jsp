@@ -21,7 +21,7 @@
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Upload a zip file</h2>
-                <p>Upload a zip file of the product source code</p>
+                <p>Upload a zip file of the project source code</p>
                 <form action="/staticScanner/startScan" method="post"
                       enctype="multipart/form-data">
                     <div class="input-group input-group-md">
@@ -29,7 +29,7 @@
                         <input type="file" name="zipFile" id="zipFile" class="form-control">
                     </div>
                     <br>
-                    <input type="hidden" name="isFileUpload" value="true">
+                    <input type="hidden" name="sourceCodeUploadAsZip" value="true">
                     <button class="btn btn-primary btn-block">Submit & Start Scan</button>
                 </form>
             </div>
@@ -44,17 +44,7 @@
                         <input name="url" id="url" class="form-control">
                     </div>
                     <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">Branch</span>
-                        <input name="branch" id="branch" class="form-control">
-                    </div>
-                    <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">Tag</span>
-                        <input name="tag" id="tag" class="form-control">
-                    </div>
-                    <br>
-                    <input type="hidden" name="isFileUpload" value="false">
+                    <input type="hidden" name="sourceCodeUploadAsZip" value="false">
                     <button class="btn btn-primary btn-block">Submit & Start Scan</button>
                 </form>
             </div>

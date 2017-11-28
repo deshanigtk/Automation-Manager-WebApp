@@ -35,15 +35,7 @@
                         <input type="file" name="urlListFile" class="form-control" required>
                     </div>
                     <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">
-                                <input type="checkbox" name="isAuthenticatedScan" checked>
-                            <input type="hidden" name="isAuthenticatedScan" value="1">
-                        </span>
-                        <label class="form-control">Authenticated Scan</label>
-                    </div>
-                    <br>
-                    <input type="hidden" name="isFileUpload" value="true">
+                    <input type="hidden" name="productUploadAsZip" value="true">
                     <button class="btn btn-primary btn-block">Submit and Start Scan</button>
                 </form>
             </div>
@@ -68,30 +60,12 @@
                         <input type="file" name="urlListFile" class="form-control" required>
                     </div>
                     <br>
-                    <div class="input-group input-group-md">
-                        <span class="input-group-addon">
-                                <input type="checkbox" name="isAuthenticatedScan">
-                            <input type="hidden" name="isAuthenticatedScan" value="0">
-                        </span>
-                        <label class="form-control">Authenticated Scan</label>
-                    </div>
-                    <br>
-                    <input type="hidden" name="isFileUpload" value="false">
+                    <input type="hidden" name="productUploadAsZip" value="false">
 
                     <button class="btn btn-primary btn-block">Submit and Start Scan</button>
                 </form>
             </div>
         </div>
-
-        <c:if test="${message != ''}">
-
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="alert alert-danger" role="alert">
-                    <strong>Message</strong> ${message}
-                </div>
-            </div>
-
-        </c:if>
     </div>
 </div>
 <%@include file="../fragments/footer.jsp" %>

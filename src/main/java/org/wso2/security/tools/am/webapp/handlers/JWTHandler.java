@@ -42,6 +42,7 @@ public class JWTHandler {
     public static boolean validateToken(String signedJWTAsString) {
         try {
             RSAPublicKey publicKey;
+            //TODO:change to a trust store
             InputStream file = ClassLoader.getSystemResourceAsStream("wso2carbon.jks");
             KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
             keystore.load(file, "wso2carbon".toCharArray());
@@ -72,6 +73,7 @@ public class JWTHandler {
 
     public static String extractEmailFromJWT(String signedJWTAsString) {
         try {
+            //TODO:don't need to validate here
             if (validateToken(signedJWTAsString)) {
                 SignedJWT signedJWT = SignedJWT.parse(signedJWTAsString);
                 String jsonString = signedJWT.getPayload().toString();

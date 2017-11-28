@@ -126,8 +126,6 @@ public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
     /**
      * Completes the request and receives response from the server.
      *
-     * @return a list of Strings as response in case the server returned
-     * status OK, otherwise an exception is thrown.
      * @throws IOException
      */
     public void finish() throws IOException {

@@ -22,6 +22,9 @@ import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.wso2.security.tools.am.webapp.handlers.HttpsRequestHandler;
 import org.wso2.security.tools.am.webapp.handlers.TokenHandler;
 
@@ -38,7 +41,7 @@ import java.util.Map;
  */
 @Service
 @PropertySource("classpath:global.properties")
-public class MainService {
+public class UserService {
 
     @Value("${automation.manager.host}")
     private String automationManagerHost;
@@ -102,4 +105,8 @@ public class MainService {
         return null;
     }
 
+    @PostMapping("signin")
+    public void signin(@RequestParam String userId){
+
+    }
 }

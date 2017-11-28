@@ -39,26 +39,21 @@ import java.net.URISyntaxException;
 @PropertySource("classpath:global.properties")
 public class DynamicScannerService {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     @Value("${automation.manager.host}")
     private String automationManagerHost;
-
     @Value("${automation.manager.https-port}")
     private int automationManagerPort;
-
     @Value("${dynamic-scanner.start-scan}")
     private String startScan;
 
-    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-
-
-    public String startScan(DynamicScanner dynamicScanner, MultipartFile urlListFile, boolean isFileUpload, MultipartFile zipFile,
-                            String wso2ServerHost, int wso2ServerPort, boolean isAuthenticatedScan) {
-
+    public String startScan(DynamicScanner dynamicScanner, MultipartFile urlListFile, boolean productUploadAsZipFile, MultipartFile zipFile,
+                            String wso2ServerHost, int wso2ServerPort) {
         String accessToken = TokenHandler.getAccessToken();
         int i = 0;
         while (i < 10) {
             try {
-                if (isFileUpload) {
+                if (productUploadAsZipFile) {
                     if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
                         return "Please upload a zip file";
                     }
@@ -73,16 +68,15 @@ public class DynamicScannerService {
                 String charset = "UTF-8";
 
                 MultipartRequestHandler multipartRequest = new MultipartRequestHandler(uri.toString(), charset, accessToken);
+//                multipartRequest.addFormField("scanType",dynamicScanner.getScanType());
                 multipartRequest.addFormField("userId", dynamicScanner.getUserId());
                 multipartRequest.addFormField("testName", dynamicScanner.getTestName());
-                multipartRequest.addFormField("ipAddress", dynamicScanner.getIpAddress());
                 multipartRequest.addFormField("productName", dynamicScanner.getProductName());
                 multipartRequest.addFormField("wumLevel", dynamicScanner.getWumLevel());
-                multipartRequest.addFormField("isFileUpload", String.valueOf(isFileUpload));
-                multipartRequest.addFormField("isAuthenticatedScan", String.valueOf(isAuthenticatedScan));
+                multipartRequest.addFormField("isFileUpload", String.valueOf(productUploadAsZipFile));
                 multipartRequest.addFilePart("urlListFile", urlListFile.getInputStream(), urlListFile.getOriginalFilename());
 
-                if (isFileUpload) {
+                if (productUploadAsZipFile) {
                     multipartRequest.addFilePart("zipFile", zipFile.getInputStream(), zipFile.getOriginalFilename());
 
                 } else {

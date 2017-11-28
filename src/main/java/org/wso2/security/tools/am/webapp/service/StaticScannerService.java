@@ -38,24 +38,21 @@ import java.net.*;
 @PropertySource("classpath:global.properties")
 public class StaticScannerService {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     @Value("${automation.manager.host}")
     private String automationManagerHost;
-
     @Value("${automation.manager.https-port}")
     private int automationManagerPort;
-
     @Value("${static-scanner.start-scan}")
     private String startScan;
 
-    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-
-    public String startScan(StaticScanner staticScanner, boolean isFileUpload, MultipartFile zipFile,
-                            String url, String branch, String tag) {
+    public String startScan(StaticScanner staticScanner, boolean sourceCodeUploadAsZip, MultipartFile zipFile,
+                            String url) {
         String accessToken = TokenHandler.getAccessToken();
         int i = 0;
         while (i < 10) {
             try {
-                if (isFileUpload) {
+                if (sourceCodeUploadAsZip) {
                     if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
                         return "Please upload a zip file";
                     }
@@ -77,26 +74,21 @@ public class StaticScannerService {
                 multipartRequest.addFormField("ipAddress", staticScanner.getIpAddress());
                 multipartRequest.addFormField("productName", staticScanner.getProductName());
                 multipartRequest.addFormField("wumLevel", staticScanner.getWumLevel());
-                multipartRequest.addFormField("isFileUpload", String.valueOf(isFileUpload));
+                multipartRequest.addFormField("isFileUpload", String.valueOf(sourceCodeUploadAsZip));
                 multipartRequest.addFormField("isFindSecBugs", String.valueOf(staticScanner.isFindSecBugs()));
                 multipartRequest.addFormField("isDependencyCheck", String.valueOf(staticScanner.isDependencyCheck()));
 
-                if (isFileUpload) {
+                if (sourceCodeUploadAsZip) {
                     multipartRequest.addFilePart("zipFile", zipFile.getInputStream(), zipFile.getOriginalFilename());
 
                 } else {
                     multipartRequest.addFormField("url", url);
-                    if (branch != null) {
-                        multipartRequest.addFormField("branch", branch);
-                    }
-                    if (tag != null) {
-                        multipartRequest.addFormField("tag", tag);
-                    }
                 }
                 multipartRequest.finish();
                 if (multipartRequest.getResponseStatus() == HttpStatus.SC_OK) {
                     return "Ok";
                 }
+                //TODO: token request only if 401 returns. check code. add it aftr sleep
                 Thread.sleep(1000);
 
             } catch (URISyntaxException | IOException | InterruptedException e) {
