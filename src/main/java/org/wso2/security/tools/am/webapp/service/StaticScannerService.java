@@ -1,5 +1,5 @@
-package org.wso2.security.tools.am.webapp.service;/*
-*  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+/*
+*  Copyright (c) ${2017}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this file except
@@ -15,82 +15,69 @@ package org.wso2.security.tools.am.webapp.service;/*
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.am.webapp.service;
 
 import org.apache.http.HttpStatus;
 import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.wso2.security.tools.am.webapp.config.GlobalProperties;
 import org.wso2.security.tools.am.webapp.entity.StaticScanner;
+import org.wso2.security.tools.am.webapp.exception.AutomationManagerWebException;
 import org.wso2.security.tools.am.webapp.handlers.MultipartRequestHandler;
 import org.wso2.security.tools.am.webapp.handlers.TokenHandler;
 
 import java.io.IOException;
-import java.net.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
- * @author Deshani Geethika
+ * Service layer methods to handle static scanners
  */
 @Service
-@PropertySource("classpath:global.properties")
 public class StaticScannerService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-    @Value("${automation.manager.host}")
-    private String automationManagerHost;
-    @Value("${automation.manager.https-port}")
-    private int automationManagerPort;
-    @Value("${static-scanner.start-scan}")
-    private String startScan;
 
-    public String startScan(StaticScanner staticScanner, boolean sourceCodeUploadAsZip, MultipartFile zipFile,
-                            String url) {
+    /**
+     * Send multiple requests to Automation Manager to start a static scans based on scan types
+     *
+     * @param staticScanner         Static scanner model attribute
+     * @param sourceCodeUploadAsZip Whether the project source code is uploaded as a zip file. False means clone from
+     *                              gitHub
+     * @param zipFile               Zip file of the project source code
+     * @param gitUrl                GitHub URL of the project source code
+     * @throws AutomationManagerWebException The general exception for all the exceptions thrown by web app
+     */
+    public void sendMultipleStartScanRequests(StaticScanner staticScanner, boolean sourceCodeUploadAsZip,
+                                              MultipartFile zipFile, String gitUrl) throws
+            AutomationManagerWebException {
+        String scanType;
+        if (staticScanner.isFindSecBugs()) {
+            scanType = GlobalProperties.getFsbType();
+            startScan(staticScanner, sourceCodeUploadAsZip, zipFile, gitUrl, scanType);
+        }
+        if (staticScanner.isDependencyCheck()) {
+            scanType = GlobalProperties.getDcType();
+            startScan(staticScanner, sourceCodeUploadAsZip, zipFile, gitUrl, scanType);
+        }
+    }
+
+    private void startScan(StaticScanner staticScanner, boolean sourceCodeUploadAsZip, MultipartFile zipFile, String
+            gitUrl, String scanType) throws AutomationManagerWebException {
         String accessToken = TokenHandler.getAccessToken();
         int i = 0;
-        while (i < 10) {
+        while (i < 5) {
             try {
-                if (sourceCodeUploadAsZip) {
-                    if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
-                        return "Please upload a zip file";
-                    }
-                } else {
-                    if (url == null) {
-                        return "Please enter a URL to clone";
-                    }
-                }
-
-                URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("https").setPath(startScan)
-                        .build();
-
-                String charset = "UTF-8";
-
-                MultipartRequestHandler multipartRequest = new MultipartRequestHandler(uri.toString(), charset, accessToken);
-
-                multipartRequest.addFormField("userId", staticScanner.getUserId());
-                multipartRequest.addFormField("testName", staticScanner.getTestName());
-                multipartRequest.addFormField("ipAddress", staticScanner.getIpAddress());
-                multipartRequest.addFormField("productName", staticScanner.getProductName());
-                multipartRequest.addFormField("wumLevel", staticScanner.getWumLevel());
-                multipartRequest.addFormField("isFileUpload", String.valueOf(sourceCodeUploadAsZip));
-                multipartRequest.addFormField("isFindSecBugs", String.valueOf(staticScanner.isFindSecBugs()));
-                multipartRequest.addFormField("isDependencyCheck", String.valueOf(staticScanner.isDependencyCheck()));
-
-                if (sourceCodeUploadAsZip) {
-                    multipartRequest.addFilePart("zipFile", zipFile.getInputStream(), zipFile.getOriginalFilename());
-
-                } else {
-                    multipartRequest.addFormField("url", url);
-                }
-                multipartRequest.finish();
+                validateRequest(sourceCodeUploadAsZip, zipFile, gitUrl);
+                MultipartRequestHandler multipartRequest = sendRequestToStartScan(accessToken, staticScanner,
+                        sourceCodeUploadAsZip, zipFile, gitUrl, scanType);
                 if (multipartRequest.getResponseStatus() == HttpStatus.SC_OK) {
-                    return "Ok";
+                    break;
                 }
-                //TODO: token request only if 401 returns. check code. add it aftr sleep
                 Thread.sleep(1000);
-
             } catch (URISyntaxException | IOException | InterruptedException e) {
                 e.printStackTrace();
                 TokenHandler.generateAccessToken();
@@ -98,6 +85,44 @@ public class StaticScannerService {
                 i += 1;
             }
         }
-        return "Error response";
+    }
+
+    private void validateRequest(boolean sourceCodeUploadAsZip, MultipartFile zipFile, String gitUrl) throws
+            AutomationManagerWebException {
+        if (sourceCodeUploadAsZip) {
+            if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
+                throw new AutomationManagerWebException("Zip file required");
+            }
+        } else {
+            if (gitUrl == null) {
+                throw new AutomationManagerWebException("Please enter a URL to clone");
+            }
+        }
+    }
+
+    private MultipartRequestHandler sendRequestToStartScan(String accessToken, StaticScanner staticScanner,
+                                                           boolean sourceCodeUploadAsZip, MultipartFile zipFile,
+                                                           String gitUrl, String scanType) throws URISyntaxException,
+            IOException {
+        URI uri = (new URIBuilder()).setHost(GlobalProperties.getAutomationManagerHost()).setPort(GlobalProperties
+                .getAutomationManagerPort()).setScheme("https").setPath(GlobalProperties.getDynamicScannerStartScan())
+                .build();
+        String charset = "UTF-8";
+        MultipartRequestHandler multipartRequest = new MultipartRequestHandler(uri.toString(), charset, accessToken);
+        multipartRequest.addFormField("userId", staticScanner.getUserId());
+        multipartRequest.addFormField("testName", staticScanner.getTestName());
+        multipartRequest.addFormField("productName", staticScanner.getProductName());
+        multipartRequest.addFormField("wumLevel", staticScanner.getWumLevel());
+        multipartRequest.addFormField("sourceCodeUploadAsZip", String.valueOf(sourceCodeUploadAsZip));
+
+        multipartRequest.addFormField("scanType", scanType);
+        if (sourceCodeUploadAsZip) {
+            multipartRequest.addFilePart("zipFile", zipFile.getInputStream(), zipFile.getOriginalFilename());
+        } else {
+            multipartRequest.addFormField("gitUrl", gitUrl);
+        }
+        multipartRequest.finish();
+        LOGGER.info("SERVER REPLIED:");
+        return multipartRequest;
     }
 }

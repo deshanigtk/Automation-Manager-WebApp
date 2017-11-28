@@ -15,8 +15,7 @@
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Static Scanner</h2>
                 <p>This scanner will accept a zip file or a GitHub url of the source code of the project. Then
-                    Static Scanner can start scanning your source code usingFindSecBugs or/and OWASP Dependency
-                    Check.</p>
+                    Static Scanner can start scanning your source code using given static scanners</p>
                 <form action="/staticScanner/scanners" method="post">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Test Name</span>
@@ -44,9 +43,8 @@
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Dynamic Scanner</h2>
-                <p>This scanner will accept a zip file of the product, or else a url of already running server. Then
-                    Dynamic Scanner can start scanning your up and running product using OWASP Zed Attack
-                    proxy(ZAP).</p>
+                <p>This scanner will accept a zip file of the product, or url of a running server. Then
+                    Dynamic Scanner can start scanning the server using given dynamic scanners</p>
                 <form action="/dynamicScanner/scanners" method="post">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">Test Name</span>

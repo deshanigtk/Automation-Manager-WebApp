@@ -23,7 +23,7 @@ import org.wso2.security.tools.am.webapp.handlers.TokenHandler;
 import javax.annotation.PostConstruct;
 
 /**
- * This class defines the start up methods of the application
+ * This class defines start up methods of the application
  */
 @Component
 public class StartUpInit {

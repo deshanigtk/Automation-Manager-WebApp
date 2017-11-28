@@ -1,5 +1,5 @@
 /*
- * Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) ${2017}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -18,35 +18,39 @@
 
 package org.wso2.security.tools.am.webapp.handlers;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.net.ssl.HttpsURLConnection;
 
 
 /**
- * @author Deshani Geethika
+ * Utility methods for handling HTTPS multipart requests
  */
 public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
-
-    private String boundary;
     private static final String LINE_FEED = "\r\n";
+    private String boundary;
     private HttpsURLConnection httpsURLConnection;
     private String charset;
     private OutputStream outputStream;
     private PrintWriter writer;
 
     /**
-     * This constructor initializes a new HTTP POST request with content type
-     * is set to multipart/form-data
+     * This constructor initializes a new HTTP POST request with content type is set to multipart/form-data
      *
-     * @param requestURL
-     * @param charset
-     * @throws IOException
+     * @param requestURL  Requester URL
+     * @param charset     Charset
+     * @param accessToken Access token to be set when sending requests through API Manager
+     * @throws IOException If an I/O error occurs
      */
-
     public MultipartRequestHandler(String requestURL, String charset, String accessToken) throws IOException {
         init();
         if (isInitialized) {
@@ -71,8 +75,8 @@ public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
     /**
      * Adds a form field to the request
      *
-     * @param name  field name
-     * @param value field value
+     * @param name  Field name
+     * @param value Field value
      */
     public void addFormField(String name, String value) {
         writer.append("--").append(boundary).append(LINE_FEED);
@@ -86,20 +90,18 @@ public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
     /**
      * Adds a upload file section to the request
      *
-     * @param fieldName  name attribute in <input type="file" name="..." />
-     * @param uploadFile a File to be uploaded
-     * @throws IOException
+     * @param fieldName  Field name
+     * @param uploadFile A File to be uploaded
+     * @param fileName   Name of the file
+     * @throws IOException If an I/O error occurs
      */
-    public void addFilePart(String fieldName, InputStream uploadFile, String fileName)
-            throws IOException {
-
+    public void addFilePart(String fieldName, InputStream uploadFile, String fileName) throws IOException {
         writer.append("--").append(boundary).append(LINE_FEED);
         writer.append("Content-Disposition: form-data; name=\"").append(fieldName).append("\"; filename=\"").append(fileName).append("\"").append(LINE_FEED);
         writer.append("Content-Type: ").append(URLConnection.guessContentTypeFromName(fileName)).append(LINE_FEED);
         writer.append("Content-Transfer-Encoding: binary").append(LINE_FEED);
         writer.append(LINE_FEED);
         writer.flush();
-
         byte[] buffer = new byte[4096];
         int bytesRead;
         while ((bytesRead = uploadFile.read(buffer)) != -1) {
@@ -114,8 +116,8 @@ public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
     /**
      * Adds a header field to the request.
      *
-     * @param name  - name of the header field
-     * @param value - value of the header field
+     * @param name  Name of the header field
+     * @param value Value of the header field
      */
     public void addHeaderField(String name, String value) {
         writer.append(name).append(": ").append(value).append(LINE_FEED);
@@ -126,11 +128,10 @@ public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
     /**
      * Completes the request and receives response from the server.
      *
-     * @throws IOException
+     * @throws IOException If an I/O error occurs
      */
     public void finish() throws IOException {
         List<String> response = new ArrayList<>();
-
         writer.append(LINE_FEED).flush();
         writer.append("--").append(boundary).append("--").append(LINE_FEED);
         writer.close();
@@ -150,6 +151,12 @@ public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
         }
     }
 
+    /**
+     * Get the status code from the response
+     *
+     * @return The response code
+     * @throws IOException If an I/O error occurs
+     */
     public int getResponseStatus() throws IOException {
         return httpsURLConnection.getResponseCode();
     }

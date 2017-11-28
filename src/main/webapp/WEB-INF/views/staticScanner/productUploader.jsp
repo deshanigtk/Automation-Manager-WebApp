@@ -41,7 +41,7 @@
                 <form action="/staticScanner/startScan" method="post" enctype="multipart/form-data">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">GitHub URL</span>
-                        <input name="url" id="url" class="form-control">
+                        <input name="gitUrl" id="gitUrl" class="form-control">
                     </div>
                     <br>
                     <input type="hidden" name="sourceCodeUploadAsZip" value="false">

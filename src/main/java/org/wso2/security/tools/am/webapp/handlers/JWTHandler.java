@@ -1,5 +1,5 @@
 /*
- * Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) ${2017}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -23,6 +23,8 @@ import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jwt.SignedJWT;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,55 +37,64 @@ import java.security.interfaces.RSAPublicKey;
 import java.text.ParseException;
 
 /**
- * @author Deshani Geethika
+ * This class provides utility methods to handle JWT
  */
+@SuppressWarnings("unused")
 public class JWTHandler {
+    private final static Logger LOGGER = LoggerFactory.getLogger(JWTHandler.class);
 
-    public static boolean validateToken(String signedJWTAsString) {
-        try {
-            RSAPublicKey publicKey;
-            //TODO:change to a trust store
-            InputStream file = ClassLoader.getSystemResourceAsStream("wso2carbon.jks");
-            KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-            keystore.load(file, "wso2carbon".toCharArray());
+    /**
+     * The main contract of this method is to validate a given JWT
+     *
+     * @param signedJWTAsString A signed JWT
+     * @return Whether the token is valid
+     * @throws IOException              If an exception is produced by failed or interrupted I/O operations
+     * @throws CertificateException     If a certificate error occurs
+     * @throws NoSuchAlgorithmException This exception is thrown when a particular cryptographic algorithm is
+     *                                  requested but is not available in the environment
+     * @throws JOSEException            Javascript Object Signing and Encryption (JOSE) exception
+     * @throws KeyStoreException        This is the generic KeyStore exception
+     * @throws ParseException           If an error has been reached unexpectedly while parsing
+     */
+    public static boolean validateToken(String signedJWTAsString) throws IOException, CertificateException,
+            NoSuchAlgorithmException, JOSEException, KeyStoreException, ParseException {
 
-            String alias = "wso2carbon";
+        RSAPublicKey publicKey;
+        //TODO:change to a trust store
+        InputStream file = ClassLoader.getSystemResourceAsStream("wso2carbon.jks");
+        KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+        keystore.load(file, "wso2carbon".toCharArray());
+        String alias = "wso2carbon";
+        // Get certificate of public key
+        Certificate cert = keystore.getCertificate(alias);
+        // Get public key
+        publicKey = (RSAPublicKey) cert.getPublicKey();
 
-            // Get certificate of public key
-            Certificate cert = keystore.getCertificate(alias);
-            // Get public key
-            publicKey = (RSAPublicKey) cert.getPublicKey();
+        // Enter JWT String here
+        SignedJWT signedJWT = SignedJWT.parse(signedJWTAsString);
+        JWSVerifier verifier = new RSASSAVerifier(publicKey);
 
-            // Enter JWT String here
-            SignedJWT signedJWT = SignedJWT.parse(signedJWTAsString);
-
-            JWSVerifier verifier = new RSASSAVerifier(publicKey);
-
-            if (signedJWT.verify(verifier)) {
-                System.out.println("Signature is Valid");
-                return true;
-            } else {
-                System.out.println("Signature is NOT Valid");
-            }
-        } catch (IOException | CertificateException | NoSuchAlgorithmException | JOSEException | KeyStoreException | ParseException e) {
-            e.printStackTrace();
+        if (signedJWT.verify(verifier)) {
+            LOGGER.info("Signature is Valid");
+            return true;
+        } else {
+            LOGGER.error("Signature is NOT Valid");
         }
         return false;
     }
 
-    public static String extractEmailFromJWT(String signedJWTAsString) {
-        try {
-            //TODO:don't need to validate here
-            if (validateToken(signedJWTAsString)) {
-                SignedJWT signedJWT = SignedJWT.parse(signedJWTAsString);
-                String jsonString = signedJWT.getPayload().toString();
-                JSONObject jsonObject = new JSONObject(jsonString);
-                return jsonObject.getString("sub");
-
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+    /**
+     * Extract email address from a JWT
+     *
+     * @param signedJWTAsString A signed JWT to be extracted
+     * @return Extracted email value from JWT
+     * @throws ParseException If an error has been reached unexpectedly
+     *                        while parsing
+     */
+    public static String extractEmailFromJWT(String signedJWTAsString) throws ParseException {
+        SignedJWT signedJWT = SignedJWT.parse(signedJWTAsString);
+        String jsonString = signedJWT.getPayload().toString();
+        JSONObject jsonObject = new JSONObject(jsonString);
+        return jsonObject.getString("sub");
     }
 }

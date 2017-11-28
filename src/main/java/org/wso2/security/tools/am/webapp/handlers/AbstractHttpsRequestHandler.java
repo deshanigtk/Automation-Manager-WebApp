@@ -1,5 +1,5 @@
 /*
- * Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) ${2017}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -25,41 +25,34 @@ import java.io.InputStream;
 import java.security.KeyStore;
 
 /**
- * Abstract Https request handler
+ * The abstract class {@link AbstractHttpsRequestHandler} is to initiate a Https request by setting SSL context
  *
- * @author Deshani Geethika
  */
 public abstract class AbstractHttpsRequestHandler {
-
     private static final String trustStoreType = "JKS";
     private static final String trustManagerType = "SunX509";
     private static final String protocol = "TLSv1.2";
     private static final String trustStorePath = "org.wso2.security.tools.am.webapp/truststore.jks";
     private static final String trustStorePassword = "wso2carbon";
-
     private static KeyStore trustStore;
-
     protected static SSLSocketFactory sslSocketFactory;
     protected static boolean isInitialized = false;
 
+    /**
+     * Initiate a SSL socket factory for HTTPS request
+     */
     protected static void init() {
         try {
             trustStore = KeyStore.getInstance(trustStoreType);
             InputStream inputStream = HttpsRequestHandler.class.getClassLoader().getResourceAsStream(trustStorePath);
             assert inputStream != null;
-            System.out.println(inputStream);
             trustStore.load(inputStream, trustStorePassword.toCharArray());
-
             TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(trustManagerType);
             trustManagerFactory.init(trustStore);
-
             SSLContext sslContext = SSLContext.getInstance(protocol);
-
             sslContext.init(null, trustManagerFactory.getTrustManagers(), null);
             sslSocketFactory = sslContext.getSocketFactory();
-
             isInitialized = true;
-
         } catch (Exception e) {
             e.printStackTrace();
         }
