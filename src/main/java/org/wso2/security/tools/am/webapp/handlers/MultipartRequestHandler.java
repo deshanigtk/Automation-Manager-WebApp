@@ -18,6 +18,9 @@
 
 package org.wso2.security.tools.am.webapp.handlers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,13 +38,16 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * Utility methods for handling HTTPS multipart requests
  */
+@SuppressWarnings("unused")
 public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
+
     private static final String LINE_FEED = "\r\n";
     private String boundary;
     private HttpsURLConnection httpsURLConnection;
     private String charset;
     private OutputStream outputStream;
     private PrintWriter writer;
+    private final static Logger LOGGER = LoggerFactory.getLogger(JWTHandler.class);
 
     /**
      * This constructor initializes a new HTTP POST request with content type is set to multipart/form-data
@@ -58,7 +64,6 @@ public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
 
             // creates a unique boundary based on time stamp
             boundary = "===" + System.currentTimeMillis() + "===";
-
             URL url = new URL(requestURL);
             httpsURLConnection = (HttpsURLConnection) url.openConnection();
             httpsURLConnection.setSSLSocketFactory(sslSocketFactory);
@@ -135,7 +140,6 @@ public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
         writer.append(LINE_FEED).flush();
         writer.append("--").append(boundary).append("--").append(LINE_FEED);
         writer.close();
-
         // checks server's status code first
         int status = httpsURLConnection.getResponseCode();
         if (status == HttpsURLConnection.HTTP_OK) {
@@ -143,6 +147,7 @@ public class MultipartRequestHandler extends AbstractHttpsRequestHandler {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 response.add(line);
+                System.out.println(line);
             }
             reader.close();
             httpsURLConnection.disconnect();

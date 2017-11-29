@@ -1,14 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: deshani
-  Date: 9/18/17
-  Time: 4:49 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<!-- Static navbar -->
-<%--<nav class="navbar navbar-default navbar-static-top">--%>
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -26,8 +17,7 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#">My Scans</a></li>
             </ul>
-        </div><!--/.nav-collapse -->
+        </div>
     </div>
 </nav>
-
 </html>

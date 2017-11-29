@@ -1,5 +1,5 @@
 /*
- * Copyright (c) ${2017}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -60,7 +60,6 @@ public class JWTHandler {
             NoSuchAlgorithmException, JOSEException, KeyStoreException, ParseException {
 
         RSAPublicKey publicKey;
-        //TODO:change to a trust store
         InputStream file = ClassLoader.getSystemResourceAsStream("wso2carbon.jks");
         KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
         keystore.load(file, "wso2carbon".toCharArray());
@@ -69,8 +68,6 @@ public class JWTHandler {
         Certificate cert = keystore.getCertificate(alias);
         // Get public key
         publicKey = (RSAPublicKey) cert.getPublicKey();
-
-        // Enter JWT String here
         SignedJWT signedJWT = SignedJWT.parse(signedJWTAsString);
         JWSVerifier verifier = new RSASSAVerifier(publicKey);
 

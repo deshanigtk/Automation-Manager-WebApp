@@ -1,5 +1,5 @@
 /*
- * Copyright (c) ${2017}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -18,6 +18,7 @@
 
 package org.wso2.security.tools.am.webapp.handlers;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,12 +26,14 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
-import javax.net.ssl.HttpsURLConnection;
 
 /**
- * The class {@link HttpsRequestHandler} extends {@link AbstractHttpsRequestHandler} provides utility methods for HTTPS request handling
+ * The class {@link HttpsRequestHandler} extends {@link AbstractHttpsRequestHandler} provides utility methods for
+ * HTTPS request handling
  */
+@SuppressWarnings("unused")
 public class HttpsRequestHandler extends AbstractHttpsRequestHandler {
+
     /**
      * Send HTTPS request
      *
@@ -42,9 +45,9 @@ public class HttpsRequestHandler extends AbstractHttpsRequestHandler {
      * @return {@link HttpsURLConnection}
      * @throws IOException
      */
-    public static HttpsURLConnection sendRequest(String link, Map<String, String> requestHeaders, Map<String, Object> requestParams,
+    public static HttpsURLConnection sendRequest(String link, Map<String, String> requestHeaders, Map<String, Object>
+            requestParams,
                                                  String method, String accessToken) throws IOException {
-
         if (!isInitialized) {
             init();
         }
@@ -63,7 +66,6 @@ public class HttpsRequestHandler extends AbstractHttpsRequestHandler {
         if (requestParams != null) {
             url = new URL(url.toString() + "?" + postData);
         }
-
         HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
         httpsURLConnection.setSSLSocketFactory(sslSocketFactory);
         httpsURLConnection.setRequestMethod(method);
@@ -89,7 +91,6 @@ public class HttpsRequestHandler extends AbstractHttpsRequestHandler {
         try {
             BufferedReader bf = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream()));
             StringBuilder builder = new StringBuilder();
-
             String line;
             line = bf.readLine();
             while (line != null) {
@@ -116,7 +117,6 @@ public class HttpsRequestHandler extends AbstractHttpsRequestHandler {
             if (entry.getKey() == null) {
                 continue;
             }
-
             if (entry.getKey().equals(key)) {
                 return entry.getValue();
             }

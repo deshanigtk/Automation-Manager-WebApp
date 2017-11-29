@@ -1,5 +1,5 @@
 /*
-*  Copyright (c) ${2017}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this file except
@@ -37,6 +37,7 @@ import org.wso2.security.tools.am.webapp.service.MainService;
 @SessionAttributes({"user", "staticScanner", "dynamicScanner"})
 @Controller
 public class ViewController {
+
     private final MainService mainService;
     private final DynamicScannerService dynamicScannerService;
     private final StaticScannerService staticScannerService;

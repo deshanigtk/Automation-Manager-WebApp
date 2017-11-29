@@ -60,7 +60,7 @@ public class TokenHandler {
 
     /**
      * Get generated access token
-     * @return
+     * @return Access token
      */
     public static String getAccessToken() {
         return accessToken;

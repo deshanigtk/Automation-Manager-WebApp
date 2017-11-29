@@ -1,5 +1,5 @@
 /*
-*  Copyright (c) ${2017}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this propertiesFile to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this propertiesFile except
@@ -43,7 +43,7 @@ public class GlobalProperties {
         try {
             Properties properties = new Properties();
             properties.load(new BufferedInputStream(GlobalProperties.class.getClassLoader().getResourceAsStream
-                    ("/global.properties")));
+                    ("global.properties")));
             clientId = properties.getProperty("webapp.client-id");
             clientSecret = properties.getProperty("webapp.client-secret");
             accessTokenUri = properties.getProperty("webapp.access-token-uri");
@@ -56,7 +56,6 @@ public class GlobalProperties {
             dcType = properties.getProperty("scanner.static.dc.type");
             getStaticScanners = properties.getProperty("get.static.scanners");
             getDynamicScanners = properties.getProperty("get.dynamic.scanners");
-
         } catch (IOException e) {
             e.printStackTrace();
         }

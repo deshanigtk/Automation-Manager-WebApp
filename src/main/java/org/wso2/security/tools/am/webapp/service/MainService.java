@@ -35,6 +35,7 @@ import java.net.URISyntaxException;
  */
 @Service
 public class MainService {
+
     /**
      * Get JSON array of scans done by a user
      *
@@ -70,7 +71,6 @@ public class MainService {
                 userId).build();
         HttpsURLConnection httpsURLConnection = HttpsRequestHandler.sendRequest(uriToGetStaticScanners.toString(),
                 null, null, "GET", accessToken);
-
         JSONArray scanners = null;
         if (httpsURLConnection.getResponseCode() == HttpStatus.SC_OK) {
             String jsonString = HttpsRequestHandler.getResponseAsString(httpsURLConnection);

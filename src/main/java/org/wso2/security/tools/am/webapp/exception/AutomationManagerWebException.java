@@ -1,4 +1,4 @@
-package org.wso2.security.tools.am.webapp.exception;/*
+/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -15,9 +15,11 @@ package org.wso2.security.tools.am.webapp.exception;/*
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.am.webapp.exception;
 
 /**
- * The class {@code AutomationManagerWebException} extends {@link Exception}, is the general Automation Manager Web App exception
+ * The class {@code AutomationManagerWebException} extends {@link Exception}, is the general Automation Manager Web
+ * App exception
  * for all operations dealing with Automation Manager Web App
  */
 @SuppressWarnings("unused")

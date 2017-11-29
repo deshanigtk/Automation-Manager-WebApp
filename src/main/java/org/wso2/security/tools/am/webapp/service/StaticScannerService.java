@@ -69,14 +69,16 @@ public class StaticScannerService {
             gitUrl, String scanType) throws AutomationManagerWebException {
         String accessToken = TokenHandler.getAccessToken();
         int i = 0;
-        while (i < 5) {
+        while (i < 1) {
             try {
                 validateRequest(sourceCodeUploadAsZip, zipFile, gitUrl);
                 MultipartRequestHandler multipartRequest = sendRequestToStartScan(accessToken, staticScanner,
                         sourceCodeUploadAsZip, zipFile, gitUrl, scanType);
                 if (multipartRequest.getResponseStatus() == HttpStatus.SC_OK) {
+                    multipartRequest.finish();
                     break;
                 }
+                multipartRequest.finish();
                 Thread.sleep(1000);
             } catch (URISyntaxException | IOException | InterruptedException e) {
                 e.printStackTrace();
@@ -105,7 +107,7 @@ public class StaticScannerService {
                                                            String gitUrl, String scanType) throws URISyntaxException,
             IOException {
         URI uri = (new URIBuilder()).setHost(GlobalProperties.getAutomationManagerHost()).setPort(GlobalProperties
-                .getAutomationManagerPort()).setScheme("https").setPath(GlobalProperties.getDynamicScannerStartScan())
+                .getAutomationManagerPort()).setScheme("https").setPath(GlobalProperties.getStaticScannerStartScan())
                 .build();
         String charset = "UTF-8";
         MultipartRequestHandler multipartRequest = new MultipartRequestHandler(uri.toString(), charset, accessToken);
@@ -114,14 +116,12 @@ public class StaticScannerService {
         multipartRequest.addFormField("productName", staticScanner.getProductName());
         multipartRequest.addFormField("wumLevel", staticScanner.getWumLevel());
         multipartRequest.addFormField("sourceCodeUploadAsZip", String.valueOf(sourceCodeUploadAsZip));
-
         multipartRequest.addFormField("scanType", scanType);
         if (sourceCodeUploadAsZip) {
             multipartRequest.addFilePart("zipFile", zipFile.getInputStream(), zipFile.getOriginalFilename());
         } else {
             multipartRequest.addFormField("gitUrl", gitUrl);
         }
-        multipartRequest.finish();
         LOGGER.info("SERVER REPLIED:");
         return multipartRequest;
     }
