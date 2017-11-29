@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="8da8e606-a973-4e4d-a799-d83a55c4db42" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/Application.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/Application.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/AppConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/AppConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/GlobalProperties.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/GlobalProperties.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/ServletInitializer.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/ServletInitializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/StartUpInit.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/StartUpInit.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/controller/ViewController.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/controller/ViewController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/exception/AutomationManagerWebException.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/exception/AutomationManagerWebException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/MultipartRequestHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/MultipartRequestHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/TokenHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/TokenHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/DynamicScannerService.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/DynamicScannerService.java" />
@@ -24,9 +29,11 @@
       <file leaf-file-name="DynamicScannerService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/DynamicScannerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="17" lean-forward="true" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="135">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#6692#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -34,9 +41,11 @@
       <file leaf-file-name="StaticScannerService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/StaticScannerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="135">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#6075#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -44,20 +53,10 @@
       <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractHttpsRequestHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/AbstractHttpsRequestHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="468">
-              <caret line="30" column="22" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+              <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding>
-                <element signature="e#0#2466#0" expanded="true" />
+                <element signature="e#0#988#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,9 +77,11 @@
       <file leaf-file-name="MultipartRequestHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/MultipartRequestHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="171">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#6354#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,9 +89,11 @@
       <file leaf-file-name="TokenHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/TokenHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="421">
+              <caret line="51" column="57" lean-forward="false" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#2490#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,7 +101,7 @@
       <file leaf-file-name="JWTHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/JWTHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="954">
+            <state relative-caret-position="802">
               <caret line="69" column="55" lean-forward="false" selection-start-line="69" selection-start-column="55" selection-end-line="69" selection-end-column="55" />
               <folding>
                 <element signature="e#0#3981#0" expanded="true" />
@@ -110,20 +113,34 @@
       <file leaf-file-name="MainService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/MainService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="135">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#3248#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppConfiguration.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/AppConfiguration.java">
+      <file leaf-file-name="AutomationManagerWebException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/exception/AutomationManagerWebException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#1645#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractHttpsRequestHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/AbstractHttpsRequestHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="468">
-              <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+              <caret line="30" column="22" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
               <folding>
-                <element signature="e#0#2063#0" expanded="true" />
+                <element signature="e#0#2466#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -180,15 +197,9 @@
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/GlobalProperty.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/controller/MainController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/AppConfiguration.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/GlobalProperties.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/ServletInitializer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/StartUpInit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/controller/ViewController.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/entity/DynamicScanner.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/entity/StaticScanner.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/entity/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/exception/AutomationManagerWebException.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/AbstractHttpsRequestHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/HttpsRequestHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/JWTHandler.java" />
@@ -198,12 +209,18 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/dynamicScanner/productUploader.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/staticScanner/productUploader.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/staticScanner/scanners.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/Application.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/AppConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/GlobalProperties.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/ServletInitializer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/StartUpInit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/controller/ViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/exception/AutomationManagerWebException.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/MultipartRequestHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/TokenHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/DynamicScannerService.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/MainService.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/StaticScannerService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/Application.java" />
       </list>
     </option>
   </component>
@@ -593,7 +610,7 @@
       <workItem from="1511852104028" duration="8207000" />
       <workItem from="1511879713364" duration="13116000" />
       <workItem from="1511926075141" duration="714000" />
-      <workItem from="1511950662909" duration="688000" />
+      <workItem from="1511950662909" duration="837000" />
     </task>
     <task id="LOCAL-00001" summary="improvements in views and controllers">
       <created>1508413725635</created>
@@ -672,11 +689,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511951251152</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Reformatted code">
+      <created>1511951358591</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1511951358591</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253109000" />
+    <option name="totallyTimeSpent" value="253258000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -863,79 +887,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/GlobalProperties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding>
-            <element signature="e#4381#4382#0" expanded="true" />
-            <element signature="e#4422#4423#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/StartUpInit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#1198#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/ServletInitializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#1101#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/controller/ViewController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/entity/DynamicScanner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/entity/StaticScanner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/exception/AutomationManagerWebException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="27" column="22" lean-forward="false" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#1644#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/common/mainScanners.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
@@ -1042,10 +993,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/AppConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        <state relative-caret-position="306">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
-            <element signature="e#0#2063#0" expanded="true" />
+            <element signature="e#0#2064#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/GlobalProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#4428#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/ServletInitializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#1102#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/StartUpInit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#1199#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/controller/ViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11757#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/entity/DynamicScanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#2553#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/entity/StaticScanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#3113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#1108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/exception/AutomationManagerWebException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#1645#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1072,7 +1103,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/JWTHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="954">
+        <state relative-caret-position="802">
           <caret line="69" column="55" lean-forward="false" selection-start-line="69" selection-start-column="55" selection-end-line="69" selection-end-column="55" />
           <folding>
             <element signature="e#0#3981#0" expanded="true" />
@@ -1082,49 +1113,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/MultipartRequestHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="171">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#6354#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/TokenHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="421">
+          <caret line="51" column="57" lean-forward="false" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#2490#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/DynamicScannerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="17" lean-forward="true" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="135">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#6692#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/MainService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="135">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#3248#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/StaticScannerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="135">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#6075#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="468">
+          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#988#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

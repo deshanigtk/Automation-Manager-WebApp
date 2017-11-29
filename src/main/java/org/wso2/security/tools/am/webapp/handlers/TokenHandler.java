@@ -33,6 +33,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Utility methods for handling access tokens using client credentials grant
  */
 public class TokenHandler {
+
     private static String accessToken;
 
     /**
@@ -49,7 +50,6 @@ public class TokenHandler {
             HttpsURLConnection urlConnection = HttpsRequestHandler.sendRequest(GlobalProperties.getAccessTokenUri(), requestHeaders, requestParams, "POST", null);
             InputStreamReader in = new InputStreamReader((InputStream) urlConnection.getContent());
             BufferedReader buff = new BufferedReader(in);
-
             String line = buff.readLine();
             JSONObject jsonObj = new JSONObject(line);
             accessToken = jsonObj.getString("access_token");

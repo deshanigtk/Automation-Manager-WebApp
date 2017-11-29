@@ -15,6 +15,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+
 package org.wso2.security.tools.am.webapp.config;
 
 import java.io.BufferedInputStream;
@@ -26,6 +27,7 @@ import java.util.Properties;
  */
 @SuppressWarnings("unused")
 public class GlobalProperties {
+
     private static String clientId;
     private static String clientSecret;
     private static String accessTokenUri;
