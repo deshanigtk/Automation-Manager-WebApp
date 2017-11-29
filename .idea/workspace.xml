@@ -3,17 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8da8e606-a973-4e4d-a799-d83a55c4db42" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/AppConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/AppConfiguration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/GlobalProperties.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/GlobalProperties.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/ServletInitializer.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/ServletInitializer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/StartUpInit.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/config/StartUpInit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/controller/ViewController.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/controller/ViewController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/exception/AutomationManagerWebException.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/exception/AutomationManagerWebException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/MultipartRequestHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/MultipartRequestHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/TokenHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/TokenHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/DynamicScannerService.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/DynamicScannerService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/MainService.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/MainService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/StaticScannerService.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/StaticScannerService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -50,7 +40,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/Application.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="468">
@@ -58,6 +48,16 @@
               <folding>
                 <element signature="e#0#988#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-357">
+              <caret line="33" column="21" lean-forward="false" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,18 +122,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AutomationManagerWebException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/exception/AutomationManagerWebException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#1645#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AbstractHttpsRequestHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/AbstractHttpsRequestHandler.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -182,7 +170,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/travelocity.properties" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/ssoAgent/ForwardingServlet.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/dynamicScanner/scanner.jsp" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/entity/Zap.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/handlers/MultipartUtility.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/common/myScans.jsp" />
@@ -221,6 +208,7 @@
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/DynamicScannerService.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/MainService.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/am/webapp/service/StaticScannerService.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -610,7 +598,7 @@
       <workItem from="1511852104028" duration="8207000" />
       <workItem from="1511879713364" duration="13116000" />
       <workItem from="1511926075141" duration="714000" />
-      <workItem from="1511950662909" duration="837000" />
+      <workItem from="1511950662909" duration="867000" />
     </task>
     <task id="LOCAL-00001" summary="improvements in views and controllers">
       <created>1508413725635</created>
@@ -696,11 +684,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511951358591</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Reformatted code">
+      <created>1511951509367</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1511951509367</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253258000" />
+    <option name="totallyTimeSpent" value="253288000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -797,14 +792,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1201">
-          <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1168,6 +1155,14 @@
           <folding>
             <element signature="e#0#988#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-357">
+          <caret line="33" column="21" lean-forward="false" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
