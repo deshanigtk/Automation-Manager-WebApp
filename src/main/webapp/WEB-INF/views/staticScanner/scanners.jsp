@@ -13,7 +13,7 @@
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="jumbotron" style="background-color: #96978d">
-                <p>Select scanning method/s and enter email address to send generated reports</p>
+                <p>Select scanning method/s</p>
                 <form action="/staticScanner/productUploader" method="post"
                       enctype="multipart/form-data">
                     <div class="input-group input-group-lg">

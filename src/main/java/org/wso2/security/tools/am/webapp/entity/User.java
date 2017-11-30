@@ -22,6 +22,7 @@ package org.wso2.security.tools.am.webapp.entity;
  * The class {@link User} is the model to store user data
  */
 public class User {
+
     private String email;
 
     /**

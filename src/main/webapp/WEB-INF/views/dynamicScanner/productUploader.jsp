@@ -10,8 +10,8 @@
     <div class="row">
         <div class="page-header">
             <h1>Dynamic Scanner</h1>
-            <p>Upload a zip file of product or else fill the
-                details of already up and running server</p>
+            <h4>Upload a zip file of product or else fill the
+                details of already up and running server</h4>
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="jumbotron" style="background-color: #96978d">

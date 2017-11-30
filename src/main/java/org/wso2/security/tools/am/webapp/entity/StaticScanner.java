@@ -21,6 +21,7 @@ package org.wso2.security.tools.am.webapp.entity;
  * The class {@link StaticScanner} is the model to store user inputs of static scanner
  */
 public class StaticScanner {
+
     private String userId;
     private String testName;
     private String productName;

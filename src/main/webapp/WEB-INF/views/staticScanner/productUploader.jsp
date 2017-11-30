@@ -14,7 +14,6 @@
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Upload a zip file</h2>
-                <p>Upload a zip file of the project source code</p>
                 <form action="/staticScanner/startScan" method="post"
                       enctype="multipart/form-data">
                     <div class="input-group input-group-md">
@@ -30,7 +29,6 @@
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="jumbotron" style="background-color: #96978d">
                 <h2>Clone from GitHub</h2>
-                <p>Clone a product source code from GitHub repository</p>
                 <form action="/staticScanner/startScan" method="post" enctype="multipart/form-data">
                     <div class="input-group input-group-md">
                         <span class="input-group-addon">GitHub URL</span>

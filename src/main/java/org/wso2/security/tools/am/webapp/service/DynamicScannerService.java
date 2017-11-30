@@ -22,7 +22,6 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.am.webapp.config.GlobalProperties;
@@ -104,9 +103,9 @@ public class DynamicScannerService {
 
     private MultipartRequestHandler sendRequestToStartScan(String accessToken, DynamicScanner dynamicScanner,
                                                            MultipartFile urlListFile, boolean productUploadAsZip,
-                                                           MultipartFile zipFile,
-                                                           String wso2ServerHost, int wso2ServerPort, String
-                                                                   scanType) throws URISyntaxException, IOException {
+                                                           MultipartFile zipFile, String wso2ServerHost, int
+                                                                   wso2ServerPort, String scanType) throws
+            URISyntaxException, IOException {
         URI uri = (new URIBuilder()).setHost(GlobalProperties.getAutomationManagerHost()).setPort(GlobalProperties
                 .getAutomationManagerPort()).setScheme("https").setPath(GlobalProperties.getDynamicScannerStartScan())
                 .build();

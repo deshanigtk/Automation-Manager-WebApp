@@ -22,6 +22,7 @@ package org.wso2.security.tools.am.webapp.entity;
  * The class {@link DynamicScanner} is the model to store user inputs of dynamic scanner
  */
 public class DynamicScanner {
+
     private String userId;
     private String testName;
     private String productName;
