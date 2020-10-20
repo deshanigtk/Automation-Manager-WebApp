@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="AutomationManagerWebapp:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="automation-manager-webapp.war">
-      <element id="artifact" artifact-name="AutomationManagerWebapp:war exploded" />
-    </root>
-  </artifact>
-</component>
